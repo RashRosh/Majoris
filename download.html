@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Скачать ассеты madjoris.ru</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#0a0c10;color:#edeff4;max-width:760px;margin:40px auto;padding:0 20px}
+button{font-size:16px;padding:14px 28px;border-radius:10px;border:0;background:#2be0d4;color:#04221f;font-weight:700;cursor:pointer}
+button:disabled{opacity:.5}
+#log{margin-top:20px;font-size:13px;color:#8b93a3;white-space:pre-line}
+a{color:#2be0d4}
+</style>
+</head>
+<body>
+<h1>Ассеты madjoris.ru</h1>
+<p>Нажмите кнопку — все картинки сайта скачаются одним ZIP-архивом (assets_madjoris.zip).</p>
+<button id="go">Скачать ZIP (18 файлов)</button>
+<div id="log"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+const CDN='https://m-files.cdn1.cc/lpfile/';
+const FILES=[
+ ['photo_etapy_rabot.jpeg','2/a/0/2a0e0c577e038a3099ab06176764ecde/-/resize/1200/f.jpeg'],
+ ['photo_sreda_cd_goroda.jpg','5/a/5/5a5ac5a99fc374b7b8e52a6283d4574c/f.jpg'],
+ ['photo_zhiloy_fond.jpg','7/0/0/7003eb4ea069aef09c732b09b2ae4bab/f.jpg'],
+ ['photo_teh_objekty.jpg','4/1/8/418727045b05ea4da3af379e9df2d7fb/f.jpg'],
+ ['photo_inye_proekty.jpg','1/b/8/1b84aded6b3f42e153870fc74a40ecd8/f.jpg'],
+ ['bg_section_1.jpg','3/3/f/33fb26af7f88b5f37dd7da1653a15e87.jpg'],
+ ['bg_section_2.jpg','6/1/a/61a866d454975dbad5bd94e0f358a82d.jpg'],
+ ['icon_soprovozhdenie_1.png','a/e/a/aead6b7fda08996aecdb9c1a153a508a/f.png'],
+ ['icon_bezopasnost_vpm.png','2/d/3/2d3ab0d88c0c55eaab9134dc2a1a5e72/f.png'],
+ ['icon_virtualny_kontent.png','5/d/b/5dbce1c6b4a5b18331c0cbf6c2e0283a/f.png'],
+ ['icon_cifrovoy_dvoynik.png','8/8/3/883ffb60bc2d16b4641bde53268bd208/f.png'],
+ ['icon_vr_ar.png','b/0/e/b0e062cbe2d49f6ec0ef68060079ed6e/f.png'],
+ ['icon_razrabotka_po.png','2/8/a/28a32cfb961361c3cd10908b03f9cea0/f.png'],
+ ['icon_vr_prostranstva.png','f/0/2/f02a671b8aeb3ab086f091f34e56f36f/f.png'],
+ ['icon_inye_it.png','3/d/4/3d4a3a8a77e399ec793e431306a7bbd2/f.png'],
+ ['icon_soprovozhdenie_2.png','7/2/e/72e2f623e02f8f872c1e37619810a19a/f.png'],
+ ['icon_vygodnye_usloviya.png','f/7/6/f76560cc74ee4762df4b5c4e2481be0e/f.png'],
+ ['icon_bezopasnost_footer.png','a/8/d/a8dcaf2936197a80fe49bfea8dc5bce8/f.png'],
+ ['icon_house_rules.svg','9/f/c/9fc5ce783e08d996b741e7c37fcf3c38.svg'],
+];
+const log=m=>document.getElementById('log').textContent+= m+'\n';
+document.getElementById('go').onclick=async function(){
+  this.disabled=true;
+  const zip=new JSZip(), folder=zip.folder('madjoris_assets');
+  let ok=0;
+  for(const [name,path] of FILES){
+    try{
+      const r=await fetch(CDN+path);
+      if(!r.ok) throw new Error(r.status);
+      folder.file(name, await r.blob());
+      ok++; log('✓ '+name);
+    }catch(e){ log('✗ '+name+' — '+e.message); }
+  }
+  log('Готово: '+ok+'/'+FILES.length+'. Формирую ZIP…');
+  const blob=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='assets_madjoris.zip'; a.click();
+  log('ZIP скачан.');
+  this.disabled=false;
+};
+</script>
+</body>
+</html>
