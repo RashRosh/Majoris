@@ -3,22 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>МАДЖОРИС — VR разработка, 3D моделирование, нейросети | цифровые решения</title>
-<meta name="description" content="Madjoris — студия VR-разработки, 3D-моделирования и решений на базе нейросетей для архитектуры, промышленности, медицины и образования.">
+<title>MADJORIS — VR-разработка, 3D-моделирование и нейросети для промышленности</title>
+<meta name="description" content="Madjoris — инженерная студия VR/AR, 3D-моделирования, цифровых двойников и AI-решений для архитектуры, промышленности, медицины и образования. От 3D-модели до внедрённой цифровой платформы.">
+<meta property="og:title" content="MADJORIS — VR, 3D, цифровые двойники и нейросети">
+<meta property="og:description" content="Инженерные цифровые решения: VR-тренажёры, 3D-визуализация, цифровые двойники и AI для промышленности, строительства и городской среды.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0c10;
-  --bg2:#10131a;
-  --card:#13161f;
-  --line:rgba(237,239,244,.09);
-  --text:#edeff4;
-  --muted:#8b93a3;
-  --red:#ff3b5c;
-  --cyan:#2be0d4;
-  --maxw:1240px;
+  --bg:#0a0e13;
+  --bg2:#0e131b;
+  --card:#10161f;
+  --card2:#131c27;
+  --line:rgba(140,170,195,.12);
+  --line2:rgba(140,170,195,.22);
+  --text:#e9eef4;
+  --muted:#8b97a6;
+  --dim:#59636f;
+  --cyan:#28d7c8;
+  --cyan2:#37e6ff;
+  --blue:#3d7bff;
+  --maxw:1320px;
   --radius:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -26,504 +33,642 @@ html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'Manrope',system-ui,sans-serif;
-  font-size:16px;
-  line-height:1.65;
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-::selection{background:var(--cyan);color:#04221f}
+::selection{background:var(--cyan);color:#03201d}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-h1,h2,h3{font-family:'Unbounded',sans-serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
-
-/* ---------- anaglyph signature ---------- */
-.ana{position:relative;display:inline-block}
-.ana::before,.ana::after{
-  content:attr(data-t);
-  position:absolute;inset:0;
-  pointer-events:none;
-  mix-blend-mode:screen;
-  opacity:.6;
-}
-.ana::before{color:var(--red);transform:translateX(-3px)}
-.ana::after{color:var(--cyan);transform:translateX(3px)}
-@media (prefers-reduced-motion:no-preference){
-  .ana.live::before{animation:anaL 7s ease-in-out infinite}
-  .ana.live::after{animation:anaR 7s ease-in-out infinite}
-  @keyframes anaL{0%,100%{transform:translateX(-3px)}50%{transform:translateX(-6px)}}
-  @keyframes anaR{0%,100%{transform:translateX(3px)}50%{transform:translateX(6px)}}
-}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.mono.dim{color:var(--dim)}
+h1,h2,h3,h4{font-family:'Inter',sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+.accent{color:var(--cyan)}
+.grad-text{background:linear-gradient(100deg,var(--cyan2),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ---------- header ---------- */
 header{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  background:rgba(10,12,16,.82);
-  backdrop-filter:blur(14px);
+  background:rgba(10,14,19,.78);
+  backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:'Unbounded';font-weight:800;font-size:18px;letter-spacing:.04em}
-.logo .dot{color:var(--cyan)}
-.menu{display:flex;gap:6px;align-items:center}
-.menu a{
-  padding:8px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--muted);
-  transition:color .2s,background .2s;
-}
-.menu a:hover{color:var(--text);background:rgba(255,255,255,.05)}
-.menu a.active{color:var(--text)}
-.menu a.cta{background:var(--text);color:#0a0c10;margin-left:10px}
-.menu a.cta:hover{background:var(--cyan)}
-.burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;color:var(--text);width:42px;height:42px;font-size:18px;cursor:pointer}
-@media(max-width:960px){
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:'Inter';font-weight:900;font-size:19px;letter-spacing:.05em;display:flex;align-items:center;gap:10px}
+.logo .mark{width:26px;height:26px;border:1.5px solid var(--cyan);border-radius:6px;position:relative;display:inline-block}
+.logo .mark::before{content:"";position:absolute;inset:5px;border:1.5px solid var(--cyan);border-radius:3px;transform:rotate(45deg);opacity:.7}
+.menu{display:flex;gap:4px;align-items:center}
+.menu a{padding:9px 14px;border-radius:8px;font-size:14px;font-weight:600;color:var(--muted);transition:.2s}
+.menu a:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.menu a.active{color:var(--cyan)}
+.menu a.cta{background:linear-gradient(100deg,var(--cyan),var(--blue));color:#03141a;margin-left:12px;font-weight:700}
+.menu a.cta:hover{filter:brightness(1.1)}
+.burger{display:none;background:none;border:1px solid var(--line2);border-radius:8px;color:var(--text);width:44px;height:44px;font-size:18px;cursor:pointer}
+@media(max-width:1080px){
   .burger{display:block}
-  .menu{
-    display:none;position:absolute;top:68px;left:0;right:0;
-    flex-direction:column;align-items:stretch;gap:0;
-    background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 24px 20px;
-  }
+  .menu{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg2);border-bottom:1px solid var(--line);padding:12px 24px 22px}
   .menu.open{display:flex}
-  .menu a{padding:13px 10px;font-size:16px}
-  .menu a.cta{margin:10px 0 0;text-align:center}
+  .menu a{padding:14px 10px;font-size:16px}
+  .menu a.cta{margin:12px 0 0;text-align:center}
 }
 
-/* ---------- page scaffolding ---------- */
-main{padding-top:68px;min-height:100vh}
-.page{display:none;animation:fadein .35s ease}
+/* ---------- scaffolding ---------- */
+main{padding-top:70px}
+.page{display:none;animation:fade .4s ease}
 .page.visible{display:block}
-@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-section{padding:84px 0}
-@media(max-width:720px){section{padding:56px 0}}
-.eyebrow{margin-bottom:18px}
-.h-xl{font-size:clamp(34px,5.4vw,68px);font-weight:800}
-.h-lg{font-size:clamp(26px,3.6vw,44px)}
-.h-md{font-size:clamp(19px,2.2vw,26px)}
-.lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);max-width:640px}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-@media(max-width:860px){.split{grid-template-columns:1fr}}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:14px 26px;border-radius:10px;font-weight:700;font-size:15px;
-  border:1px solid var(--line);cursor:pointer;font-family:inherit;
-  transition:transform .15s,background .2s,border-color .2s;
-}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+section{padding:96px 0;position:relative}
+@media(max-width:760px){section{padding:60px 0}}
+.eyebrow{margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--cyan);display:inline-block}
+.h-xl{font-size:clamp(36px,6vw,76px);font-weight:900;letter-spacing:-.03em}
+.h-lg{font-size:clamp(28px,4vw,48px)}
+.h-md{font-size:clamp(20px,2.4vw,28px)}
+.lead{font-size:clamp(16px,1.5vw,19px);color:var(--muted);max-width:680px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:36px}}
+.section-head{max-width:760px;margin-bottom:50px}
+.section-head p{color:var(--muted);margin-top:16px}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--line2);cursor:pointer;font-family:inherit;transition:transform .15s,background .2s,border-color .2s,color .2s}
 .btn:hover{transform:translateY(-2px)}
-.btn.primary{background:var(--text);color:#0a0c10;border-color:transparent}
-.btn.primary:hover{background:var(--cyan)}
+.btn.primary{background:linear-gradient(100deg,var(--cyan),var(--blue));color:#03141a;border-color:transparent}
+.btn.primary:hover{filter:brightness(1.08)}
 .btn.ghost{background:transparent;color:var(--text)}
 .btn.ghost:hover{border-color:var(--cyan);color:var(--cyan)}
-.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
-  outline:2px solid var(--cyan);outline-offset:2px;
-}
+.btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 
 /* ---------- hero ---------- */
-.hero{
-  position:relative;overflow:hidden;
-  padding:130px 0 110px;
-  border-bottom:1px solid var(--line);
-}
-.hero-grid{
-  position:absolute;left:-10%;right:-10%;bottom:-2%;height:62%;
-  background:
-    repeating-linear-gradient(90deg,rgba(43,224,212,.14) 0 1px,transparent 1px 70px),
-    repeating-linear-gradient(0deg,rgba(43,224,212,.14) 0 1px,transparent 1px 70px);
-  transform:perspective(620px) rotateX(64deg);
-  transform-origin:top;
-  mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);
-  pointer-events:none;
-}
-.hero .wrap{position:relative;z-index:1}
-.hero .lead{margin:26px 0 38px}
-.hero-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:54px}
-.hero-tags span{
-  font-family:'JetBrains Mono';font-size:12px;letter-spacing:.1em;
-  border:1px solid var(--line);border-radius:99px;padding:7px 16px;color:var(--muted);
-}
+.hero{padding:80px 0 90px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+@media(max-width:980px){.hero-inner{grid-template-columns:1fr;gap:40px}}
+.hero h1{margin:18px 0 24px}
+.hero .lead{margin-bottom:6px}
+.hero-strip{display:flex;gap:26px;flex-wrap:wrap;margin-top:44px;padding-top:30px;border-top:1px solid var(--line)}
+.hero-strip div{display:flex;flex-direction:column;gap:4px}
+.hero-strip b{font-size:22px;font-weight:800}
+.hero-strip span{font-size:13px;color:var(--muted)}
 
-/* ---------- direction blocks (главная) ---------- */
-.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:860px){.dirs{grid-template-columns:1fr}}
-.dir{
-  position:relative;display:block;
-  border:1px solid var(--line);border-radius:var(--radius);
-  background:var(--card);
-  padding:36px 28px 30px;min-height:280px;
-  overflow:hidden;
-  transition:border-color .25s,transform .2s;
-}
-.dir:hover{border-color:rgba(43,224,212,.5);transform:translateY(-4px)}
-.dir .idx{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);letter-spacing:.16em}
-.dir h3{font-size:22px;margin:60px 0 12px}
-.dir p{color:var(--muted);font-size:15px}
-.dir .go{position:absolute;right:24px;top:28px;font-size:20px;color:var(--muted);transition:color .2s,transform .2s}
-.dir:hover .go{color:var(--cyan);transform:translateX(4px)}
-.dir::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
-  background:linear-gradient(90deg,var(--red),var(--cyan));
-  opacity:0;transition:opacity .25s;
-}
-.dir:hover::after{opacity:1}
+/* digital-twin visualization */
+.twin{position:relative;aspect-ratio:1/.92;border:1px solid var(--line2);border-radius:18px;background:linear-gradient(160deg,#0c131c,#090d12);overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,0,0,.8)}
+.twin .hud{position:absolute;inset:0;z-index:3;pointer-events:none}
+.twin .hud .corner{position:absolute;width:18px;height:18px;border:1.5px solid var(--cyan);opacity:.7}
+.twin .hud .c1{top:14px;left:14px;border-right:0;border-bottom:0}
+.twin .hud .c2{top:14px;right:14px;border-left:0;border-bottom:0}
+.twin .hud .c3{bottom:14px;left:14px;border-right:0;border-top:0}
+.twin .hud .c4{bottom:14px;right:14px;border-left:0;border-top:0}
+.twin .tag{position:absolute;font-family:'JetBrains Mono';font-size:10.5px;letter-spacing:.12em;color:var(--muted)}
+.twin .tag.t1{top:18px;left:42px;color:var(--cyan)}
+.twin .tag.t2{top:18px;right:42px}
+.twin .tag.t3{bottom:18px;left:42px}
+.twin .tag.t4{bottom:18px;right:42px;color:var(--cyan)}
+.twin svg{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+.twin .scan{position:absolute;left:0;right:0;height:140px;z-index:2;background:linear-gradient(to bottom,transparent,rgba(40,215,200,.10),transparent);animation:scan 6s linear infinite}
+@keyframes scan{0%{top:-140px}100%{top:100%}}
+.twn-node{fill:var(--cyan)}
+.twn-node.p{animation:pulse 3s ease-in-out infinite}
+.twn-node.p2{animation:pulse 3s ease-in-out infinite .9s}
+.twn-node.p3{animation:pulse 3s ease-in-out infinite 1.7s}
+@keyframes pulse{0%,100%{opacity:.35;r:3}50%{opacity:1;r:5}}
+@media (prefers-reduced-motion:reduce){.twin .scan,.twn-node.p,.twn-node.p2,.twn-node.p3{animation:none}}
+
+/* ---------- value chips ---------- */
+.vchips{display:flex;gap:14px;flex-wrap:wrap;margin-top:40px}
+.vchip{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:12px 18px;background:var(--card);font-size:14px;color:var(--muted)}
+.vchip b{color:var(--text);font-weight:600}
+.vchip .dotx{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
 
 /* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
-.stat{border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;background:var(--bg2)}
-.stat b{font-family:'Unbounded';font-size:clamp(26px,3vw,38px);font-weight:600;display:block}
-.stat span{color:var(--muted);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:30px 26px;background:var(--bg2)}
+.stat b{font-size:clamp(28px,3.4vw,42px);font-weight:900;display:block;letter-spacing:-.02em}
+.stat b .accent{font-weight:900}
+.stat span{color:var(--muted);font-size:14px;display:block;margin-top:6px}
 
-/* ---------- portfolio cards ---------- */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 28px}
-.chip{
-  font-family:'JetBrains Mono';font-size:12px;letter-spacing:.08em;
-  border:1px solid var(--line);background:transparent;color:var(--muted);
-  border-radius:99px;padding:8px 18px;cursor:pointer;transition:all .2s;
-}
-.chip:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
-.chip.on{background:var(--text);color:#0a0c10;border-color:transparent;font-weight:500}
+/* ---------- direction cards ---------- */
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.dirs{grid-template-columns:1fr}}
+.dir{position:relative;display:block;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:30px 28px 28px;overflow:hidden;transition:border-color .25s,transform .2s,background .25s}
+.dir:hover{border-color:var(--line2);transform:translateY(-4px);background:var(--card2)}
+.dir .ico{width:46px;height:46px;border:1px solid var(--line2);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--cyan);margin-bottom:46px}
+.dir .idx{position:absolute;right:26px;top:30px;font-family:'JetBrains Mono';font-size:12px;color:var(--dim);letter-spacing:.16em}
+.dir h3{font-size:21px;margin-bottom:12px}
+.dir p{color:var(--muted);font-size:15px;margin-bottom:18px}
+.dir .go{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.1em;color:var(--cyan);display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.dir:hover .go{gap:14px}
+.dir::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));opacity:0;transition:opacity .25s}
+.dir:hover::after{opacity:1}
+
+/* ---------- generic feature/value grids ---------- */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:900px){.feat{grid-template-columns:1fr}}
+.feat>div{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--bg2)}
+.feat b{display:block;font-size:16px;margin-bottom:10px}
+.feat p{color:var(--muted);font-size:14px}
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px}
+@media(max-width:760px){.values{grid-template-columns:1fr}}
+.values>div{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--card)}
+.values b{display:block;font-size:17px;margin-bottom:10px}
+.values .num{font-family:'JetBrains Mono';color:var(--cyan);font-size:13px}
+.values p{color:var(--muted);font-size:15px}
+.techline{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.techline span{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.04em;border:1px solid var(--line2);border-radius:8px;padding:9px 16px;color:var(--muted)}
+
+/* ---------- portfolio ---------- */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 30px}
+.chip{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em;border:1px solid var(--line2);background:transparent;color:var(--muted);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.2s}
+.chip:hover{color:var(--text);border-color:var(--cyan)}
+.chip.on{background:var(--cyan);color:#03201d;border-color:transparent;font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
-.card{
-  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
-  background:var(--card);cursor:pointer;text-align:left;font-family:inherit;color:inherit;
-  transition:transform .2s,border-color .25s;padding:0;display:block;width:100%;
-}
-.card:hover{transform:translateY(-4px);border-color:rgba(43,224,212,.45)}
-.thumb{
-  aspect-ratio:16/10;position:relative;display:flex;align-items:flex-end;
-  padding:14px;overflow:hidden;
-}
-.thumb .ph{
-  position:absolute;inset:0;
-  background-size:cover;
-}
-.thumb .badge{
-  position:relative;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;
-  background:rgba(10,12,16,.75);backdrop-filter:blur(6px);
-  padding:5px 12px;border-radius:99px;border:1px solid var(--line);
-}
-.thumb .play{
-  position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;
-  background:rgba(10,12,16,.75);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--cyan);
-}
-.card-body{padding:20px 20px 22px}
-.card-body h4{font-family:'Unbounded';font-weight:600;font-size:16px;line-height:1.35;margin-bottom:8px}
-.card-body p{color:var(--muted);font-size:14px;margin-bottom:14px}
+.card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:transform .2s,border-color .25s;padding:0;display:block;width:100%}
+.card:hover{transform:translateY(-4px);border-color:var(--line2)}
+.thumb{aspect-ratio:16/10;position:relative;display:flex;align-items:flex-end;padding:14px;overflow:hidden}
+.thumb .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.thumb .badge{position:relative;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;background:rgba(8,11,16,.78);backdrop-filter:blur(6px);padding:6px 12px;border-radius:99px;border:1px solid var(--line2)}
+.thumb .play{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;background:rgba(8,11,16,.78);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--cyan)}
+.card-body{padding:22px 20px 24px}
+.card-body h4{font-weight:700;font-size:16px;line-height:1.35;margin-bottom:10px}
+.card-body p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.card-res{display:flex;align-items:baseline;gap:8px;margin-bottom:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg2)}
+.card-res b{font-family:'JetBrains Mono';color:var(--cyan);font-size:17px;font-weight:700}
+.card-res span{font-size:12.5px;color:var(--muted)}
 .techs{display:flex;gap:6px;flex-wrap:wrap}
-.techs i{
-  font-style:normal;font-family:'JetBrains Mono';font-size:11px;color:var(--muted);
-  border:1px solid var(--line);border-radius:6px;padding:3px 9px;
-}
+.techs i{font-style:normal;font-family:'JetBrains Mono';font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px}
+.ph::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px 38px),repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 38px)}
+.ph.arch{background:linear-gradient(135deg,#0f2a3d,#0a141d 65%),radial-gradient(circle at 78% 22%,rgba(40,215,200,.34),transparent 55%)}
+.ph.design{background:linear-gradient(135deg,#13283f,#0a121c 65%),radial-gradient(circle at 22% 78%,rgba(61,123,255,.34),transparent 55%)}
+.ph.edu{background:linear-gradient(135deg,#10322c,#0a1614 65%),radial-gradient(circle at 75% 72%,rgba(40,215,200,.3),transparent 50%)}
+.ph.industry{background:linear-gradient(135deg,#13283a,#0a1119 65%),radial-gradient(circle at 28% 26%,rgba(55,230,255,.3),transparent 50%)}
+.ph.med{background:linear-gradient(135deg,#102338,#0a121c 65%),radial-gradient(circle at 70% 30%,rgba(120,170,255,.3),transparent 50%)}
 
-/* per-industry placeholder visuals */
-.ph.arch{background:linear-gradient(135deg,#16324a,#0c1622 60%),radial-gradient(circle at 80% 20%,rgba(43,224,212,.35),transparent 55%)}
-.ph.design{background:linear-gradient(135deg,#3a1c3f,#14101e 60%),radial-gradient(circle at 20% 80%,rgba(255,59,92,.35),transparent 55%)}
-.ph.edu{background:linear-gradient(135deg,#1d3a2c,#0d1713 60%),radial-gradient(circle at 75% 75%,rgba(43,224,212,.3),transparent 50%)}
-.ph.industry{background:linear-gradient(135deg,#42301a,#171008 60%),radial-gradient(circle at 30% 25%,rgba(255,150,60,.3),transparent 50%)}
-.ph.med{background:linear-gradient(135deg,#1c2f4a,#0e131f 60%),radial-gradient(circle at 70% 30%,rgba(120,180,255,.3),transparent 50%)}
-.ph::after{
-  content:"";position:absolute;inset:0;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 36px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 36px);
-}
+/* ---------- service hero ---------- */
+.svc-hero{border-bottom:1px solid var(--line);padding:88px 0 64px;position:relative;overflow:hidden}
+.svc-hero .grid-bg{position:absolute;inset:0;background:radial-gradient(circle at 80% 0%,rgba(40,215,200,.1),transparent 45%);pointer-events:none}
 
-/* ---------- service page ---------- */
-.svc-hero{border-bottom:1px solid var(--line);padding:96px 0 70px;position:relative;overflow:hidden}
-.svc-hero .lead{margin-top:22px}
-.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
-@media(max-width:860px){.feat{grid-template-columns:1fr}}
-.feat div{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--bg2)}
-.feat b{display:block;font-size:16px;margin-bottom:8px}
-.feat p{color:var(--muted);font-size:14px}
-.techline{display:flex;gap:8px;flex-wrap:wrap;margin-top:34px}
-.techline span{
-  font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em;
-  border:1px solid var(--line);border-radius:8px;padding:8px 16px;color:var(--muted);
-}
+/* ---------- process ---------- */
+.proc{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:46px;counter-reset:p}
+@media(max-width:1000px){.proc{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media(max-width:560px){.proc{grid-template-columns:1fr}}
+.pstep{position:relative;padding:24px 18px;border:1px solid var(--line);border-right:0;background:var(--card)}
+.proc .pstep:last-child{border-right:1px solid var(--line)}
+@media(max-width:1000px){.pstep{border-right:1px solid var(--line);border-radius:10px}}
+.pstep:hover{background:var(--card2)}
+.pstep .pn{font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);letter-spacing:.1em}
+.pstep .bar{height:3px;background:linear-gradient(90deg,var(--cyan),var(--blue));margin:12px 0 16px;border-radius:2px;opacity:.5}
+.pstep h4{font-size:15px;margin-bottom:8px}
+.pstep p{font-size:12.5px;color:var(--muted)}
 
-/* ---------- about ---------- */
-.values{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:40px}
-@media(max-width:720px){.values{grid-template-columns:1fr}}
-.values div{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--card)}
-.values b{display:block;font-size:17px;margin-bottom:8px}
-.values p{color:var(--muted);font-size:15px}
+/* ---------- tech ecosystem ---------- */
+.eco{position:relative;margin-top:44px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 50% 45%,rgba(40,215,200,.06),transparent 60%),var(--bg2);padding:40px 28px;overflow:hidden}
+.eco-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative;z-index:2}
+@media(max-width:900px){.eco-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.eco-grid{grid-template-columns:1fr}}
+.eco-col{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:20px 18px}
+.eco-col h4{font-size:14px;color:var(--cyan);font-family:'JetBrains Mono';font-weight:500;letter-spacing:.06em;margin-bottom:14px;text-transform:uppercase}
+.eco-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.eco-col li{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:9px}
+.eco-col li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);flex:none;opacity:.7}
+.eco-hub{text-align:center;margin-bottom:30px;position:relative;z-index:2}
+.eco-hub span{font-family:'JetBrains Mono';font-size:12px;color:var(--dim);letter-spacing:.12em}
+
+/* ---------- certificates ---------- */
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+@media(max-width:760px){.certs{grid-template-columns:1fr}}
+.cert{border:1px dashed var(--line2);border-radius:12px;padding:22px;background:var(--bg2);display:flex;gap:16px;align-items:flex-start}
+.cert .ci{width:40px;height:40px;border:1px solid var(--line2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex:none}
+.cert b{display:block;font-size:14px;margin-bottom:6px}
+.cert p{font-size:13px;color:var(--muted)}
+
+/* ---------- table ---------- */
+.ptable{width:100%;border-collapse:collapse;margin-top:30px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.ptable th,.ptable td{text-align:left;padding:18px 22px;border-bottom:1px solid var(--line);font-size:14px}
+.ptable th{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);background:var(--bg2)}
+.ptable td:first-child{font-weight:600}
+.ptable .term{font-family:'JetBrains Mono';color:var(--cyan)}
+.ptable tr:last-child td{border-bottom:0}
+.ptable tr:hover td{background:var(--card)}
+@media(max-width:640px){.ptable th:nth-child(3),.ptable td:nth-child(3){display:none}}
+
+/* ---------- team ---------- */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+@media(max-width:900px){.team{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.team{grid-template-columns:1fr}}
+.tm{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:22px}
+.tm .av{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#13283f,#0a121c);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';color:var(--cyan);font-size:14px;margin-bottom:16px}
+.tm b{display:block;font-size:15px;margin-bottom:4px}
+.tm .role{font-size:13px;color:var(--cyan);margin-bottom:8px}
+.tm p{font-size:13px;color:var(--muted)}
+
+/* ---------- faq ---------- */
+.faq{margin-top:14px;border-top:1px solid var(--line)}
+.fitem{border-bottom:1px solid var(--line)}
+.fq{width:100%;text-align:left;background:none;border:0;color:var(--text);font-family:inherit;font-size:17px;font-weight:600;padding:24px 44px 24px 0;cursor:pointer;position:relative}
+.fq::after{content:"+";position:absolute;right:6px;top:22px;font-size:24px;color:var(--cyan);font-weight:400;transition:transform .25s}
+.fitem.open .fq::after{transform:rotate(45deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:15px}
+.fitem.open .fa{max-height:260px}
+.fa div{padding:0 40px 24px 0}
 
 /* ---------- forms ---------- */
 form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){form .row{grid-template-columns:1fr}}
-input,textarea{
-  width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;
-  color:var(--text);font-family:inherit;font-size:15px;padding:14px 16px;margin-bottom:14px;
-  transition:border-color .2s;
-}
+input,textarea{width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:10px;color:var(--text);font-family:inherit;font-size:15px;padding:14px 16px;margin-bottom:14px;transition:border-color .2s}
 input:focus,textarea:focus{border-color:var(--cyan);outline:none}
 textarea{min-height:130px;resize:vertical}
 label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-.form-ok{
-  display:none;border:1px solid rgba(43,224,212,.4);border-radius:10px;
-  background:rgba(43,224,212,.07);color:var(--cyan);padding:16px 18px;font-size:14px;margin-top:6px;
-}
+.form-ok{display:none;border:1px solid rgba(40,215,200,.4);border-radius:10px;background:rgba(40,215,200,.07);color:var(--cyan);padding:16px 18px;font-size:14px;margin-top:6px}
 
 /* ---------- contacts ---------- */
 .contact-list div{display:flex;justify-content:space-between;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .contact-list span:first-child{color:var(--muted);font-size:14px}
 .contact-list a{font-weight:600}
 .contact-list a:hover{color:var(--cyan)}
-.map{
-  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
-  aspect-ratio:16/9;background:
-    radial-gradient(circle at 55% 45%,rgba(43,224,212,.2),transparent 30%),
-    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 44px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 44px),
-    var(--bg2);
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;
-}
-.map .pin{width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 8px rgba(43,224,212,.15),0 0 0 18px rgba(43,224,212,.06)}
+.map{border:1px solid var(--line2);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/10;background:radial-gradient(circle at 55% 45%,rgba(40,215,200,.18),transparent 32%),repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 46px),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 46px),var(--bg2);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+.map .pin{width:14px;height:14px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 8px rgba(40,215,200,.15),0 0 0 18px rgba(40,215,200,.06)}
 
 /* ---------- modal ---------- */
-.modal{
-  display:none;position:fixed;inset:0;z-index:200;
-  background:rgba(6,7,10,.8);backdrop-filter:blur(8px);
-  align-items:center;justify-content:center;padding:24px;
-}
+.modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(5,7,10,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px}
 .modal.open{display:flex}
-.modal-box{
-  background:var(--bg2);border:1px solid var(--line);border-radius:18px;
-  max-width:760px;width:100%;max-height:88vh;overflow-y:auto;position:relative;
-}
+.modal-box{background:var(--bg2);border:1px solid var(--line2);border-radius:18px;max-width:780px;width:100%;max-height:88vh;overflow-y:auto;position:relative}
 .modal-box .thumb{aspect-ratio:16/8;border-radius:18px 18px 0 0}
-.modal-box .inner{padding:30px}
-.modal-box h3{font-size:22px;margin-bottom:6px}
-.modal-box .meta{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);letter-spacing:.1em;margin-bottom:18px}
+.modal-box .inner{padding:32px}
+.modal-box h3{font-size:23px;margin-bottom:6px}
+.modal-box .meta{font-family:'JetBrains Mono';font-size:12px;color:var(--cyan);letter-spacing:.1em;margin-bottom:20px}
+.modal-box .mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+@media(max-width:560px){.modal-box .mrow{grid-template-columns:1fr}}
+.modal-box .mrow div{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--card)}
+.modal-box .mrow .k{font-family:'JetBrains Mono';font-size:11px;color:var(--dim);letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase}
+.modal-box .mrow .v{font-size:14px}
+.modal-box .mrow .v.big{font-family:'JetBrains Mono';color:var(--cyan);font-size:18px;font-weight:700}
 .modal-box p{color:var(--muted);margin-bottom:18px}
-.modal-close{
-  position:absolute;right:16px;top:16px;width:38px;height:38px;border-radius:50%;
-  background:rgba(10,12,16,.8);border:1px solid var(--line);color:var(--text);
-  font-size:16px;cursor:pointer;z-index:2;
-}
-.video-ph{
-  border:1px dashed rgba(255,255,255,.2);border-radius:12px;aspect-ratio:16/9;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
-  color:var(--muted);font-size:14px;margin-top:8px;background:rgba(255,255,255,.02);
-}
+.modal-close{position:absolute;right:16px;top:16px;width:38px;height:38px;border-radius:50%;background:rgba(8,11,16,.8);border:1px solid var(--line2);color:var(--text);font-size:16px;cursor:pointer;z-index:2}
+.video-ph{border:1px dashed var(--line2);border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:14px;margin-top:8px;background:rgba(255,255,255,.02)}
 
 /* ---------- CTA band / footer ---------- */
-.band{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(43,224,212,.05),transparent 70%);
-  text-align:center;
-}
-.band .btn{margin-top:30px}
-footer{padding:46px 0;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-footer nav{display:flex;gap:18px;flex-wrap:wrap}
-footer a:hover{color:var(--text)}
-.note{font-size:12px;color:#5b6270}
+.band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(circle at 50% 0%,rgba(40,215,200,.08),transparent 60%);text-align:center}
+.band .btn-row{justify-content:center}
+footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.foot-top{grid-template-columns:1fr;gap:24px}}
+.foot-top h5{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+.foot-top nav{display:flex;flex-direction:column;gap:10px}
+.foot-top nav a:hover,.foot-top a:hover{color:var(--cyan)}
+.foot-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:28px}
+.note{font-size:12px;color:var(--dim);max-width:520px}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="#/" class="logo">MADJORIS<span class="dot">.</span></a>
+    <a href="#/" class="logo"><span class="mark"></span>MADJORIS</a>
     <button class="burger" aria-label="Меню" onclick="document.getElementById('menu').classList.toggle('open')">≡</button>
     <nav class="menu" id="menu">
       <a href="#/" data-nav="home">Главная</a>
       <a href="#/about" data-nav="about">О компании</a>
-      <a href="#/vr" data-nav="vr">VR разработка</a>
-      <a href="#/3d" data-nav="3d">3D моделирование</a>
+      <a href="#/vr" data-nav="vr">VR&nbsp;разработка</a>
+      <a href="#/3d" data-nav="3d">3D&nbsp;моделирование</a>
       <a href="#/ai" data-nav="ai">Нейросети</a>
       <a href="#/partners" data-nav="partners">Сотрудничество</a>
-      <a href="#/contacts" data-nav="contacts" class="cta">Контакты</a>
+      <a href="#/contacts" data-nav="contacts" class="cta">Обсудить проект</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-<!-- ============ ГЛАВНАЯ ============ -->
+<!-- ================= ГЛАВНАЯ ================= -->
 <div class="page" id="page-home">
   <section class="hero">
-    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow mono">VR · 3D · Цифровые двойники · AI</div>
+        <h1 class="h-xl">Цифровые двойники <span class="grad-text">реального мира</span> для бизнеса и государства</h1>
+        <p class="lead">Madjoris проектирует VR-тренажёры, 3D-визуализацию, цифровые двойники объектов и решения на базе нейросетей — от 3D-модели до внедрённой цифровой платформы. Для промышленности, строительства, медицины и образования.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="#/partners">Обсудить проект →</a>
+          <a class="btn ghost" href="#/vr">Смотреть кейсы</a>
+        </div>
+        <div class="hero-strip">
+          <div><b>2020</b><span>на рынке IT-услуг</span></div>
+          <div><b>7+ лет</b><span>опыт каждого специалиста</span></div>
+          <div><b>4 отрасли</b><span>внедрений</span></div>
+          <div><b>3</b><span>направления разработки</span></div>
+        </div>
+      </div>
+      <div class="twin" role="img" aria-label="Визуализация цифрового двойника объекта">
+        <div class="hud">
+          <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+          <span class="tag t1">DIGITAL TWIN · LIVE</span>
+          <span class="tag t2">LAT 55.75 LON 37.62</span>
+          <span class="tag t3">MESH 1.2M TRIS</span>
+          <span class="tag t4">SYNC 100%</span>
+        </div>
+        <div class="scan"></div>
+        <svg viewBox="0 0 520 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="bld" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(40,215,200,.30)"/>
+              <stop offset="1" stop-color="rgba(40,215,200,.02)"/>
+            </linearGradient>
+            <linearGradient id="bld2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(61,123,255,.30)"/>
+              <stop offset="1" stop-color="rgba(61,123,255,.02)"/>
+            </linearGradient>
+          </defs>
+          <!-- perspective ground grid -->
+          <g stroke="rgba(120,160,190,.16)" stroke-width="1">
+            <line x1="60" y1="360" x2="260" y2="250"/><line x1="120" y1="390" x2="300" y2="262"/>
+            <line x1="190" y1="420" x2="350" y2="276"/><line x1="270" y1="452" x2="408" y2="292"/>
+            <line x1="460" y1="360" x2="260" y2="250"/><line x1="400" y1="390" x2="220" y2="262"/>
+            <line x1="330" y1="420" x2="170" y2="276"/><line x1="250" y1="452" x2="112" y2="292"/>
+            <line x1="95" y1="375" x2="425" y2="375"/><line x1="135" y1="400" x2="385" y2="400"/>
+            <line x1="185" y1="430" x2="335" y2="430"/>
+          </g>
+          <!-- wireframe buildings (digital twin city) -->
+          <g stroke="var(--cyan)" stroke-width="1.4" fill="url(#bld)">
+            <path d="M150 300 L150 210 L195 192 L195 282 Z"/>
+            <path d="M195 282 L195 192 L235 210 L235 300 Z" fill="rgba(40,215,200,.10)"/>
+            <path d="M150 210 L195 192 L235 210 L190 228 Z" fill="rgba(40,215,200,.22)"/>
+          </g>
+          <g stroke="var(--blue)" stroke-width="1.4" fill="url(#bld2)">
+            <path d="M250 330 L250 200 L295 180 L295 312 Z"/>
+            <path d="M295 312 L295 180 L340 200 L340 330 Z" fill="rgba(61,123,255,.10)"/>
+            <path d="M250 200 L295 180 L340 200 L295 220 Z" fill="rgba(61,123,255,.24)"/>
+          </g>
+          <g stroke="rgba(40,215,200,.7)" stroke-width="1.2" fill="rgba(40,215,200,.06)">
+            <path d="M335 320 L335 250 L372 235 L372 305 Z"/>
+            <path d="M372 305 L372 235 L405 250 L405 320 Z" fill="rgba(40,215,200,.10)"/>
+            <path d="M335 250 L372 235 L405 250 L368 265 Z" fill="rgba(40,215,200,.2)"/>
+          </g>
+          <!-- data nodes + connectors -->
+          <g stroke="rgba(40,215,200,.5)" stroke-width="1" stroke-dasharray="3 4">
+            <line x1="190" y1="200" x2="295" y2="186"/><line x1="295" y1="186" x2="372" y2="240"/>
+            <line x1="372" y1="240" x2="190" y2="200"/>
+          </g>
+          <circle class="twn-node p" cx="190" cy="200" r="4"/>
+          <circle class="twn-node p2" cx="295" cy="186" r="4"/>
+          <circle class="twn-node p3" cx="372" cy="240" r="4"/>
+          <circle class="twn-node p2" cx="150" cy="300" r="3"/>
+          <circle class="twn-node p" cx="340" cy="330" r="3"/>
+        </svg>
+      </div>
+    </div>
     <div class="wrap">
-      <!-- placeholder hero image -->
-      <img src="assets/hero.jpg" alt="Placeholder hero image" style="width:100%;border-radius:14px;margin-bottom:32px;">
-      <div class="eyebrow mono">VR · 3D · НЕЙРОСЕТИ</div>
-      <h1 class="h-xl"><span class="ana live" data-t="Цифровые миры">Цифровые миры</span><br>для реальных задач</h1>
-      <p class="lead">Madjoris разрабатывает VR-приложения, 3D-контент и решения на базе нейросетей для архитектуры, промышленности, медицины и образования.</p>
-      <a class="btn primary" href="#/partners">Обсудить проект</a>
-      <a class="btn ghost" href="#/vr">Смотреть проекты</a>
-      <div class="hero-tags">
-        <span>UNITY / UNREAL</span><span>WEBGL</span><span>BLENDER / 3DS MAX</span><span>STABLE DIFFUSION</span><span>COMPUTER VISION</span>
+      <div class="vchips">
+        <div class="vchip"><span class="dotx"></span><b>Полный цикл</b> — от сценария до внедрения</div>
+        <div class="vchip"><span class="dotx"></span><b>Прозрачные сроки</b> до старта проекта</div>
+        <div class="vchip"><span class="dotx"></span><b>Под метрики бизнеса</b>, а не «ради красоты»</div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="eyebrow mono">Направления</div>
-      <h2 class="h-lg" style="margin-bottom:40px">Что мы делаем</h2>
-      <div class="dirs">
-        <a class="dir" href="#/vr">
-          <img src="assets/dir-vr.jpg" alt="" style="width:100%;border-radius:10px;margin-bottom:16px;">
-          <span class="idx">VR</span><span class="go">→</span>
-          <h3>VR разработка</h3>
-          <p>Тренажёры, презентационные VR-туры, обучающие симуляции для шлемов и WebXR.</p>
-        </a>
-        <a class="dir" href="#/3d">
-          <img src="assets/dir-3d.jpg" alt="" style="width:100%;border-radius:10px;margin-bottom:16px;">
-          <span class="idx">3D</span><span class="go">→</span>
-          <h3>3D моделирование</h3>
-          <p>Архитектурная визуализация, продуктовый рендер, цифровые двойники объектов и оборудования.</p>
-        </a>
-        <a class="dir" href="#/ai">
-          <img src="assets/dir-ai.jpg" alt="" style="width:100%;border-radius:10px;margin-bottom:16px;">
-          <span class="idx">AI</span><span class="go">→</span>
-          <h3>Нейросети / ИИ</h3>
-          <p>Генеративный контент, компьютерное зрение, интеграция AI-инструментов в рабочие процессы.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
+  <!-- Stats -->
   <section style="padding-top:0">
     <div class="wrap">
       <div class="stats">
-        <div class="stat"><b>2020</b><span>год выхода компании на рынок</span></div>
-        <div class="stat"><b>7+ лет</b><span>стаж каждого специалиста</span></div>
-        <div class="stat"><b>100%</b><span>специалистов с высшим образованием</span></div>
-        <div class="stat"><b>3</b><span>направления разработки</span></div>
+        <div class="stat"><b><span class="accent">2020</span></b><span>год выхода на рынок IT-услуг</span></div>
+        <div class="stat"><b>7+ <span class="accent">лет</span></b><span>стаж каждого специалиста</span></div>
+        <div class="stat"><b><span class="accent">100%</span></b><span>специалистов с высшим образованием</span></div>
+        <div class="stat"><b><span class="accent">5</span></b><span>отраслей в портфолио</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Блок о компании на главной -->
+  <!-- Направления -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow mono">Направления</div>
+        <h2 class="h-lg">Что мы создаём</h2>
+        <p>Три инженерных направления, которые соединяются в одном проекте: визуализация, иммерсивные тренажёры и интеллектуальная автоматизация.</p>
+      </div>
+      <div class="dirs">
+        <a class="dir" href="#/vr">
+          <div class="ico">▣</div><span class="idx">01 / VR</span>
+          <h3>VR / AR разработка</h3>
+          <p>Тренажёры персонала, презентационные туры по объектам, обучающие симуляции для шлемов и WebXR.</p>
+          <span class="go">Подробнее →</span>
+        </a>
+        <a class="dir" href="#/3d">
+          <div class="ico">◳</div><span class="idx">02 / 3D</span>
+          <h3>3D-моделирование</h3>
+          <p>Архитектурная визуализация, продуктовый рендер, цифровые двойники объектов и оборудования.</p>
+          <span class="go">Подробнее →</span>
+        </a>
+        <a class="dir" href="#/ai">
+          <div class="ico">⬡</div><span class="idx">03 / AI</span>
+          <h3>Нейросети / ИИ</h3>
+          <p>Генеративный контент, компьютерное зрение, интеграция AI-инструментов в рабочие процессы.</p>
+          <span class="go">Подробнее →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- О компании teaser -->
   <section style="padding-top:0">
     <div class="wrap split">
       <div>
-        <h2 class="h-md" style="margin-bottom:16px">Опыт и экспертиза</h2>
-        <p style="color:var(--muted)">Компания работает на рынке IT‑услуг с 2020 года, а стаж каждого нашего специалиста — более семи лет; все специалисты с высшим образованием. Мы прошли путь от архитектурной визуализации до полноценных VR‑тренажёров и AI‑пайплайнов и знаем, как превратить технологию в рабочий инструмент заказчика, а не в дорогую демонстрацию.</p>
-        <p style="color:var(--muted);margin-top:14px">Работаем в рамках распоряжения Департамента ИТ г. Москвы и Комитета по архитектуре г. Москвы от 19.04.2023 № 64‑16‑192/23/769 — наши проекты соответствуют его требованиям.</p>
+        <div class="eyebrow mono">О компании</div>
+        <h2 class="h-md" style="margin-bottom:16px">Инженерный подход, а не веб-студия</h2>
+        <p style="color:var(--muted)">Компания работает на рынке IT-услуг с 2020 года, стаж каждого специалиста — более семи лет, все с высшим образованием. Мы прошли путь от архитектурной визуализации до полноценных VR-тренажёров и AI-пайплайнов и знаем, как превратить технологию в рабочий инструмент заказчика, а не в дорогую демонстрацию.</p>
+        <p style="color:var(--muted);margin-top:14px">Работаем в рамках распоряжения Департамента ИТ г. Москвы и Комитета по архитектуре г. Москвы от 19.04.2023 № 64-16-192/23/769 — наши проекты соответствуют его требованиям.</p>
+        <div class="btn-row"><a class="btn ghost" href="#/about">О компании подробнее →</a></div>
       </div>
       <div>
-        <h2 class="h-md" style="margin-bottom:16px">Как мы работаем</h2>
-        <p style="color:var(--muted)">Каждый проект начинается с задачи бизнеса: сократить расходы на обучение, ускорить согласование проекта, показать продукт до его производства. Под задачу подбираем технологии — от WebGL‑туров до симуляций на Unreal Engine.</p>
-      </div>
-    </div>
-  </section>
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="eyebrow mono">Компетенции</div>
-      <h2 class="h-lg">Почему Madjoris</h2>
-      <div class="values">
-        <div><b>Полный цикл</b><p>От сценария и 3D‑контента до публикации приложения и поддержки. Один подрядчик на весь проект.</p></div>
-        <div><b>Отраслевой опыт</b><p>Архитектура, промышленность, медицина, образование и дизайн — мы говорим на языке каждой отрасли.</p></div>
-        <div><b>Технологическая гибкость</b><p>Unity, Unreal, WebXR, Blender, 3ds Max, генеративные нейросети — выбираем стек под задачу, а не наоборот.</p></div>
-        <div><b>Результат, который измеряется</b><p>VR‑тренажёр снижает время обучения, 3D‑конфигуратор увеличивает конверсию. Мы проектируем под метрики.</p></div>
+        <div class="eyebrow mono">Принцип</div>
+        <h2 class="h-md" style="margin-bottom:16px">От задачи бизнеса — к технологии</h2>
+        <p style="color:var(--muted)">Каждый проект начинается с задачи: сократить расходы на обучение, ускорить согласование, показать продукт до его производства. Под задачу подбираем стек — от WebGL-туров до симуляций на Unreal Engine — а не наоборот.</p>
+        <div class="values" style="margin-top:24px">
+          <div><b>Полный цикл</b><p>Один подрядчик от сценария и 3D-контента до публикации приложения и поддержки.</p></div>
+          <div><b>Под метрики</b><p>VR-тренажёр снижает время обучения, 3D-конфигуратор повышает конверсию.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Кейсы -->
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="eyebrow mono">Портфолио</div>
-      <h2 class="h-lg">Избранные проекты</h2>
-      <div class="grid" id="featured" style="margin-top:40px"></div>
+      <div class="section-head">
+        <div class="eyebrow mono">Кейсы</div>
+        <h2 class="h-lg">Реальные внедрения и их результат</h2>
+        <p>Главное — не картинки, а эффект для заказчика. Каждый кейс — задача, решение и измеримый результат.</p>
+      </div>
+      <div class="grid" id="featured"></div>
+      <div class="btn-row"><a class="btn ghost" href="#/vr">Все кейсы по направлениям →</a></div>
+    </div>
+  </section>
+
+  <!-- Процесс -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow mono">Процесс</div>
+        <h2 class="h-lg">Производственный цикл проекта</h2>
+        <p>Прозрачные этапы с понятным результатом каждого — вы видите, за что платите, ещё до старта разработки.</p>
+      </div>
+      <div class="proc" id="proc"></div>
+    </div>
+  </section>
+
+  <!-- Технологии экосистема -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow mono">Технологии</div>
+        <h2 class="h-lg">Единая технологическая экосистема</h2>
+        <p>Мы не «владеем набором программ» — мы соединяем движки, 3D-пайплайн, AI и веб в один рабочий контур вокруг цифрового двойника.</p>
+      </div>
+      <div class="eco">
+        <div class="eco-hub"><span class="mono">// CORE: ЦИФРОВОЙ ДВОЙНИК</span></div>
+        <div class="eco-grid">
+          <div class="eco-col"><h4>Движки</h4><ul><li>Unity</li><li>Unreal Engine 5</li><li>WebXR / OpenXR</li></ul></div>
+          <div class="eco-col"><h4>3D-пайплайн</h4><ul><li>Blender</li><li>3ds Max</li><li>Corona / V-Ray</li><li>Substance 3D</li></ul></div>
+          <div class="eco-col"><h4>AI / CV</h4><ul><li>Stable Diffusion</li><li>ComfyUI</li><li>LLM / RAG</li><li>OpenCV · YOLO</li></ul></div>
+          <div class="eco-col"><h4>Платформы</h4><ul><li>Meta Quest 3</li><li>Pico 4</li><li>HTC Vive</li></ul></div>
+          <div class="eco-col"><h4>Web / Data</h4><ul><li>WebGL · glTF</li><li>Three.js</li><li>Python · API</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Доверие / сертификаты -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow mono">Почему нам доверяют</div>
+        <h2 class="h-lg">Соответствие требованиям и зрелость процессов</h2>
+      </div>
+      <div class="certs">
+        <div class="cert"><div class="ci">▤</div><div><b>Распоряжение ДИТ Москвы</b><p>Работаем в рамках распоряжения Департамента ИТ и Комитета по архитектуре г. Москвы № 64-16-192/23/769 от 19.04.2023.</p></div></div>
+        <div class="cert"><div class="ci">◈</div><div><b>Юридическая прозрачность</b><p>ООО «МАДЖОРИС», ИНН 9731041680. Договор, смета и НДА — стандартная часть старта проекта.</p></div></div>
+        <div class="cert"><div class="ci">⬢</div><div><b>Профильная команда</b><p>100% специалистов с высшим образованием и опытом 7+ лет в 3D, VR/AR и AI-разработке.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="padding-top:0">
+    <div class="wrap" style="max-width:920px">
+      <div class="section-head"><div class="eyebrow mono">FAQ</div><h2 class="h-lg">Частые вопросы</h2></div>
+      <div class="faq" id="faq"></div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="eyebrow mono">Сотрудничество</div>
-      <h2 class="h-lg">Есть задача под VR, 3D или AI?</h2>
-      <a class="btn primary" href="#/partners">Заполнить бриф</a>
+      <div class="eyebrow mono" style="justify-content:center">Сотрудничество</div>
+      <h2 class="h-lg">Есть задача под VR, 3D, цифровой двойник или AI?</h2>
+      <p class="lead" style="margin:16px auto 0;text-align:center">Расскажите о проекте — предложим решение и ориентир по срокам.</p>
+      <div class="btn-row"><a class="btn primary" href="#/partners">Заполнить бриф →</a><a class="btn ghost" href="#/contacts">Связаться напрямую</a></div>
     </div>
   </section>
 </div>
 
-<!-- ============ О КОМПАНИИ ============ -->
+<!-- ================= О КОМПАНИИ ================= -->
 <div class="page" id="page-about">
   <section class="svc-hero">
-    <div class="wrap">
+    <div class="grid-bg"></div>
+    <div class="wrap" style="position:relative;z-index:1">
       <div class="eyebrow mono">О компании</div>
-      <h1 class="h-xl"><span class="ana" data-t="Madjoris">Madjoris</span></h1>
-      <p class="lead">Студия разработки иммерсивных и интеллектуальных цифровых решений. Мы соединяем VR, 3D-графику и нейросети, чтобы бизнес показывал, обучал и проектировал быстрее.</p>
+      <h1 class="h-xl">Инженерная команда <span class="grad-text">цифровых решений</span></h1>
+      <p class="lead" style="margin-top:22px">Студия разработки иммерсивных и интеллектуальных цифровых продуктов. Мы соединяем VR/AR, 3D-графику, цифровые двойники и нейросети, чтобы бизнес и государство показывали, обучали и проектировали быстрее.</p>
     </div>
   </section>
   <section>
     <div class="wrap split">
       <div>
         <h2 class="h-md" style="margin-bottom:16px">Опыт и экспертиза</h2>
-        <p style="color:var(--muted)">Компания работает на рынке IT-услуг с 2020 года, а стаж каждого нашего специалиста — более семи лет; все специалисты с высшим образованием. Мы прошли путь от архитектурной визуализации до полноценных VR-тренажёров и AI-пайплайнов, и знаем, как превратить технологию в рабочий инструмент заказчика — а не в дорогую демонстрацию.</p>
-        <p style="color:var(--muted);margin-top:14px">Работаем в рамках распоряжения Департамента ИТ г. Москвы и Комитета по архитектуре г. Москвы от 19.04.2023 № 64-16-192/23/769 — наши проекты соответствуют его требованиям.</p>
+        <p style="color:var(--muted)">Компания работает на рынке IT-услуг с 2020 года, а стаж каждого специалиста — более семи лет; все специалисты с высшим образованием. Мы прошли путь от архитектурной визуализации до полноценных VR-тренажёров и AI-пайплайнов и знаем, как превратить технологию в рабочий инструмент заказчика, а не в дорогую демонстрацию.</p>
+        <p style="color:var(--muted);margin-top:14px">Работаем в рамках распоряжения Департамента ИТ г. Москвы и Комитета по архитектуре г. Москвы от 19.04.2023 № 64-16-192/23/769.</p>
       </div>
       <div>
         <h2 class="h-md" style="margin-bottom:16px">Как мы работаем</h2>
         <p style="color:var(--muted)">Каждый проект начинается с задачи бизнеса: сократить расходы на обучение, ускорить согласование проекта, показать продукт до его производства. Под задачу подбираем технологии — от WebGL-туров до симуляций на Unreal Engine.</p>
+        <p style="color:var(--muted);margin-top:14px">Мы проектируем под измеримые показатели и сопровождаем продукт после запуска — это позиция инженерного подрядчика, а не разовой студии.</p>
       </div>
     </div>
   </section>
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="eyebrow mono">Компетенции</div>
-      <h2 class="h-lg">Почему Madjoris</h2>
+      <div class="section-head"><div class="eyebrow mono">Компетенции</div><h2 class="h-lg">Почему Madjoris</h2></div>
       <div class="values">
-        <div><b>Полный цикл</b><p>От сценария и 3D-контента до публикации приложения и поддержки. Один подрядчик на весь проект.</p></div>
-        <div><b>Отраслевой опыт</b><p>Архитектура, промышленность, медицина, образование и дизайн — мы говорим на языке каждой отрасли.</p></div>
-        <div><b>Технологическая гибкость</b><p>Unity, Unreal, WebXR, Blender, 3ds Max, генеративные нейросети — выбираем стек под задачу, а не наоборот.</p></div>
-        <div><b>Результат, который измеряется</b><p>VR-тренажёр снижает время обучения, 3D-конфигуратор увеличивает конверсию. Мы проектируем под метрики.</p></div>
+        <div><span class="num">01</span><b>Полный цикл</b><p>От сценария и 3D-контента до публикации приложения и поддержки. Один подрядчик на весь проект.</p></div>
+        <div><span class="num">02</span><b>Отраслевой опыт</b><p>Архитектура, промышленность, медицина, образование и дизайн — мы говорим на языке каждой отрасли.</p></div>
+        <div><span class="num">03</span><b>Технологическая гибкость</b><p>Unity, Unreal, WebXR, Blender, 3ds Max, генеративные нейросети — выбираем стек под задачу, а не наоборот.</p></div>
+        <div><span class="num">04</span><b>Результат, который измеряется</b><p>VR-тренажёр снижает время обучения, 3D-конфигуратор увеличивает конверсию. Мы проектируем под метрики.</p></div>
       </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow mono">Команда</div><h2 class="h-lg">Кто ведёт проекты</h2></div>
+      <div class="team" id="team"></div>
+      <p class="note" style="margin-top:18px">Состав проектной команды формируется под задачу. Фото и роли специалистов предоставляются заказчиком/компанией при наполнении сайта.</p>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow mono">Типовые проекты</div><h2 class="h-lg">Понимаем сроки ещё до старта</h2><p>Ориентиры по срокам типовых проектов. Точная оценка — после брифа.</p></div>
+      <table class="ptable">
+        <thead><tr><th>Тип проекта</th><th>Срок</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>VR-тур по объекту</td><td class="term">3–5 недель</td><td>Готовое приложение для шлема/WebXR с навигацией по объекту</td></tr>
+          <tr><td>VR-тренажёр персонала</td><td class="term">6–10 недель</td><td>Симуляция со сценариями, журналом ошибок и аналитикой</td></tr>
+          <tr><td>Пакет архитектурной 3D-визуализации</td><td class="term">2–4 недели</td><td>Серия ракурсов, аэропанорамы и ролик для старта продаж</td></tr>
+          <tr><td>Цифровой двойник оборудования</td><td class="term">4–7 недель</td><td>Точная интерактивная модель для каталога, обучения и AR</td></tr>
+          <tr><td>AI-пайплайн генерации контента</td><td class="term">3–6 недель</td><td>Система генерации вариаций в фирменном стиле, интегрированная в процесс</td></tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:14px">Цены не публикуются: смета формируется индивидуально под объём и сложность.</p>
     </div>
   </section>
   <section class="band">
     <div class="wrap">
       <h2 class="h-lg">Посмотрите, что мы уже сделали</h2>
-      <a class="btn primary" href="#/vr">Проекты VR</a>
-      <a class="btn ghost" href="#/3d">Проекты 3D</a>
+      <div class="btn-row"><a class="btn primary" href="#/vr">Проекты VR</a><a class="btn ghost" href="#/3d">Проекты 3D</a><a class="btn ghost" href="#/ai">Проекты AI</a></div>
     </div>
   </section>
 </div>
 
-<!-- ============ УСЛУГИ (рендерятся из данных) ============ -->
+<!-- ================= УСЛУГИ (рендер из данных) ================= -->
 <div class="page" id="page-vr"></div>
 <div class="page" id="page-3d"></div>
 <div class="page" id="page-ai"></div>
 
-<!-- ============ СОТРУДНИЧЕСТВО ============ -->
+<!-- ================= СОТРУДНИЧЕСТВО ================= -->
 <div class="page" id="page-partners">
   <section class="svc-hero">
-    <div class="wrap">
+    <div class="grid-bg"></div>
+    <div class="wrap" style="position:relative;z-index:1">
       <div class="eyebrow mono">Сотрудничество</div>
-      <h1 class="h-xl"><span class="ana" data-t="Работаем вместе">Работаем вместе</span></h1>
-      <p class="lead">Мы открыты к проектам любого масштаба — от пилотного VR-тура до многолетней программы цифровизации обучения.</p>
+      <h1 class="h-xl">Начало <span class="grad-text">проектной работы</span></h1>
+      <p class="lead" style="margin-top:22px">Мы открыты к проектам любого масштаба — от пилотного VR-тура до многолетней программы цифровизации. Свяжитесь с инженерной командой — не «подпишитесь на новости».</p>
     </div>
   </section>
   <section>
     <div class="wrap">
-      <div class="eyebrow mono">Форматы</div>
-      <h2 class="h-lg">Как можно с нами работать</h2>
+      <div class="section-head"><div class="eyebrow mono">Форматы</div><h2 class="h-lg">Как можно с нами работать</h2></div>
       <div class="values">
         <div><b>Проект под ключ</b><p>Фиксированный объём, смета и сроки. Подходит для тренажёров, туров, презентационных приложений.</p></div>
         <div><b>Выделенная команда</b><p>Наши специалисты усиливают вашу команду на длинных продуктах: 3D-художники, Unity/Unreal-разработчики, AI-инженеры.</p></div>
         <div><b>Контент-производство</b><p>Регулярное производство 3D-моделей, рендеров и генеративного контента по вашему пайплайну.</p></div>
-        <div><b>Партнёрство для агентств</b><p>Выступаем технологическим подрядчиком для брендинговых и digital-агентств. White label — обсуждается.</p></div>
+        <div><b>Партнёрство для агентств</b><p>Технологический подрядчик для брендинговых и digital-агентств. White label — обсуждается.</p></div>
       </div>
     </div>
   </section>
   <section style="padding-top:0">
     <div class="wrap">
-      <div class="eyebrow mono">Этапы работ</div>
-      <h2 class="h-lg">Как проходит проект</h2>
-      <div class="values">
-        <div><b>01 · Консультация</b><p>Определим ваши потребности и пожелания. Специалисты зададут вопросы, чтобы понять, что вам подходит и какие критерии важны.</p></div>
-        <div><b>02 · Подбор вариантов</b><p>Начнём поиск подходящих решений: учтём все пожелания и предложим несколько вариантов на выбор.</p></div>
-        <div><b>03 · Проверка документов</b><p>Проведём юридическую и техническую оценку документов, связанных с объектом разработки, — это исключит проблемы в будущем.</p></div>
-        <div><b>04 · Реализация и согласование</b><p>Сопроводим на всех этапах: поможем оформить документы, обеспечим безопасность и прозрачность процесса.</p></div>
-      </div>
+      <div class="section-head"><div class="eyebrow mono">Этапы</div><h2 class="h-lg">Как проходит проект</h2></div>
+      <div class="proc" id="proc2"></div>
     </div>
   </section>
   <section style="padding-top:0">
@@ -533,6 +678,7 @@ footer a:hover{color:var(--text)}
         <h2 class="h-md" style="margin-bottom:14px">Заполните бриф</h2>
         <p style="color:var(--muted);margin-bottom:24px">Короткий опросник поможет нам подготовиться к первому разговору: задача, сроки, ориентир по бюджету.</p>
         <a class="btn primary" href="https://forms.google.com" target="_blank" rel="noopener">Перейти к опроснику ↗</a>
+        <p class="note" style="margin-top:14px">Ссылку на актуальный опросник укажет заказчик при наполнении.</p>
       </div>
       <div>
         <div class="eyebrow mono">Шаг 2 · или просто напишите</div>
@@ -540,11 +686,15 @@ footer a:hover{color:var(--text)}
         <form data-form>
           <div class="row">
             <div><label for="p-name">Имя</label><input id="p-name" type="text" placeholder="Как к вам обращаться" required></div>
-            <div><label for="p-mail">Email или телефон</label><input id="p-mail" type="text" placeholder="Для ответа" required></div>
+            <div><label for="p-comp">Компания</label><input id="p-comp" type="text" placeholder="Организация"></div>
+          </div>
+          <div class="row">
+            <div><label for="p-mail">Email</label><input id="p-mail" type="email" placeholder="Для ответа"></div>
+            <div><label for="p-phone">Телефон</label><input id="p-phone" type="tel" placeholder="+7"></div>
           </div>
           <label for="p-msg">О проекте</label>
           <textarea id="p-msg" placeholder="Коротко: что нужно сделать и в какие сроки"></textarea>
-          <button class="btn primary" type="submit">Отправить</button>
+          <button class="btn primary" type="submit">Отправить заявку</button>
           <div class="form-ok">Спасибо! Мы свяжемся с вами в течение рабочего дня.</div>
         </form>
       </div>
@@ -552,13 +702,14 @@ footer a:hover{color:var(--text)}
   </section>
 </div>
 
-<!-- ============ КОНТАКТЫ ============ -->
+<!-- ================= КОНТАКТЫ ================= -->
 <div class="page" id="page-contacts">
   <section class="svc-hero">
-    <div class="wrap">
+    <div class="grid-bg"></div>
+    <div class="wrap" style="position:relative;z-index:1">
       <div class="eyebrow mono">Контакты</div>
-      <h1 class="h-xl"><span class="ana" data-t="На связи">На связи</span></h1>
-      <p class="lead">Напишите в удобный мессенджер или оставьте заявку — отвечаем в течение рабочего дня.</p>
+      <h1 class="h-xl">Связаться с <span class="grad-text">инженерной командой</span></h1>
+      <p class="lead" style="margin-top:22px">Напишите в удобный мессенджер или оставьте заявку — отвечаем в течение рабочего дня.</p>
     </div>
   </section>
   <section>
@@ -574,7 +725,7 @@ footer a:hover{color:var(--text)}
         </div>
         <div class="map" style="margin-top:28px" role="img" aria-label="Карта офиса">
           <div class="pin"></div>
-          <span class="mono">Здесь будет карта (Яндекс.Карты / Google Maps)</span>
+          <span class="mono dim">Здесь будет карта (Яндекс.Карты / Google Maps)</span>
         </div>
       </div>
       <div>
@@ -582,9 +733,13 @@ footer a:hover{color:var(--text)}
         <form data-form>
           <div class="row">
             <div><label for="c-name">Имя</label><input id="c-name" type="text" required></div>
-            <div><label for="c-mail">Email или телефон</label><input id="c-mail" type="text" required></div>
+            <div><label for="c-comp">Компания</label><input id="c-comp" type="text"></div>
           </div>
-          <label for="c-msg">Сообщение</label>
+          <div class="row">
+            <div><label for="c-mail">Email</label><input id="c-mail" type="email"></div>
+            <div><label for="c-phone">Телефон</label><input id="c-phone" type="tel"></div>
+          </div>
+          <label for="c-msg">Описание задачи</label>
           <textarea id="c-msg"></textarea>
           <button class="btn primary" type="submit">Отправить</button>
           <div class="form-ok">Спасибо! Сообщение отправлено.</div>
@@ -596,7 +751,7 @@ footer a:hover{color:var(--text)}
 
 </main>
 
-<!-- ============ МОДАЛКА ПРОЕКТА ============ -->
+<!-- ================= МОДАЛКА КЕЙСА ================= -->
 <div class="modal" id="modal" role="dialog" aria-modal="true">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()" aria-label="Закрыть">✕</button>
@@ -604,6 +759,11 @@ footer a:hover{color:var(--text)}
     <div class="inner">
       <h3 id="m-title"></h3>
       <div class="meta" id="m-meta"></div>
+      <div class="mrow">
+        <div><div class="k">Задача</div><div class="v" id="m-task"></div></div>
+        <div><div class="k">Решение</div><div class="v" id="m-sol"></div></div>
+        <div><div class="k">Результат</div><div class="v big" id="m-res"></div></div>
+      </div>
       <p id="m-desc"></p>
       <div class="techs" id="m-techs"></div>
       <div class="video-ph"><span>▶</span><span>Видео-демонстрация проекта (материал заказчика)</span></div>
@@ -613,19 +773,28 @@ footer a:hover{color:var(--text)}
 
 <footer>
   <div class="wrap">
-    <div>
-      <div class="logo" style="font-size:15px">MADJORIS<span class="dot">.</span></div>
-      <div class="note" style="margin-top:6px">© 2026 ООО «МАДЖОРИС» · ИНН 9731041680 · VR / 3D / AI разработка</div>
-      <div class="note" style="margin-top:4px;max-width:480px">Все права защищены. Копирование и использование материалов сайта без письменного согласия владельца запрещены.</div>
+    <div class="foot-top">
+      <div>
+        <div class="logo" style="font-size:17px"><span class="mark"></span>MADJORIS</div>
+        <p class="note" style="margin-top:14px">Инженерные цифровые решения: VR/AR, 3D-моделирование, цифровые двойники и нейросети для промышленности, строительства, медицины и образования.</p>
+      </div>
+      <div>
+        <h5>Навигация</h5>
+        <nav>
+          <a href="#/about">О компании</a><a href="#/vr">VR разработка</a><a href="#/3d">3D моделирование</a><a href="#/ai">Нейросети</a><a href="#/partners">Сотрудничество</a><a href="#/contacts">Контакты</a>
+        </nav>
+      </div>
+      <div>
+        <h5>Контакты</h5>
+        <nav>
+          <a href="tel:+79656338888">+7 (965) 633-88-88</a><a href="mailto:info@madjoris.ru">info@madjoris.ru</a><a href="https://wa.me/79656338888" target="_blank" rel="noopener">WhatsApp</a>
+        </nav>
+      </div>
     </div>
-    <nav>
-      <a href="#/about">О компании</a>
-      <a href="#/vr">VR</a>
-      <a href="#/3d">3D</a>
-      <a href="#/ai">Нейросети</a>
-      <a href="#/partners">Сотрудничество</a>
-      <a href="#/contacts">Контакты</a>
-    </nav>
+    <div class="foot-bottom">
+      <div class="note">© 2026 ООО «МАДЖОРИС» · ИНН 9731041680. Все права защищены. Копирование материалов сайта без письменного согласия владельца запрещено.</div>
+      <a href="#" style="color:var(--muted)">Политика конфиденциальности</a>
+    </div>
   </div>
 </footer>
 
@@ -639,11 +808,39 @@ const INDUSTRIES = {
   med:     {name:'Медицина', cls:'med'},
 };
 
+const PROCESS = [
+  ['01','Анализ','Разбираем задачу бизнеса и критерии успеха. Результат — техническое задание и метрики.'],
+  ['02','Проектирование','Сценарий, архитектура решения, выбор стека. Результат — проектная документация.'],
+  ['03','Прототип','Ранний рабочий прототип ключевого сценария. Результат — проверенная гипотеза.'],
+  ['04','Разработка','Производство 3D-контента, кода, AI-пайплайнов. Результат — рабочая сборка.'],
+  ['05','Тестирование','Проверка на устройствах и сценариях, оптимизация. Результат — стабильная версия.'],
+  ['06','Внедрение','Запуск, интеграция в процессы и обучение. Результат — продукт в эксплуатации.'],
+  ['07','Поддержка','Сопровождение, доработки и развитие. Результат — продукт, который живёт.'],
+];
+
+const TEAM = [
+  ['3D','3D / Tech Art','Архитектурная визуализация, real-time ассеты, оптимизация под VR.'],
+  ['VR','VR / Unreal','Тренажёры и симуляции на Unity и Unreal Engine 5, WebXR.'],
+  ['AI','AI / CV','Генеративные пайплайны, компьютерное зрение, LLM-ассистенты.'],
+  ['PM','Управление проектами','Сроки, документация, коммуникация с заказчиком и метрики.'],
+];
+
+const FAQ = [
+  ['С какими отраслями вы работаете?','Архитектура и строительство, промышленность, медицина, образование и дизайн. Под каждую отрасль у нас есть профильные кейсы и понимание специфики.'],
+  ['Чем VR-тренажёр лучше обычного обучения?','Он позволяет безопасно отрабатывать опасные и дорогие в реальности сценарии, ведёт журнал ошибок и сокращает время и стоимость обучения персонала.'],
+  ['Что такое цифровой двойник и зачем он нужен?','Это точная цифровая модель реального объекта или оборудования, которую можно использовать для обучения, презентаций, AR-инструкций и контроля — до и во время эксплуатации.'],
+  ['Сколько длится проект?','Зависит от типа: VR-тур — 3–5 недель, тренажёр — 6–10 недель, пакет 3D-визуализации — 2–4 недели. Точную оценку даём после брифа.'],
+  ['Вы делаете только разработку или сопровождение тоже?','Полный цикл: от сценария и 3D-контента до публикации и последующей поддержки. Один подрядчик на весь проект.'],
+  ['Под какие устройства вы разрабатываете VR?','Meta Quest 3, Pico 4, HTC Vive и WebXR в браузере — выбираем платформу под задачу и аудиторию.'],
+  ['Можно ли начать с пилота?','Да. Часто оптимально стартовать с прототипа ключевого сценария, проверить гипотезу и метрики, а затем масштабировать.'],
+  ['Как формируется стоимость?','Индивидуально под объём и сложность. После брифа предоставляем смету, сроки и состав работ. Цены на сайте не публикуются.'],
+];
+
 const SERVICES = {
   vr: {
-    title:'VR разработка',
-    ana:'VR разработка',
-    lead:'Разрабатываем VR-приложения под Meta Quest, Pico, HTC Vive и WebXR: тренажёры для персонала, презентационные туры по объектам, обучающие симуляции и интерактивные шоурумы.',
+    title:'VR / AR разработка', ana:'VR / AR разработка',
+    seo:['VR разработка — Madjoris','VR/AR-приложения, тренажёры и презентационные туры под Meta Quest, Pico, HTC Vive и WebXR.'],
+    lead:'Разрабатываем VR/AR-приложения под Meta Quest, Pico, HTC Vive и WebXR: тренажёры для персонала, презентационные туры по объектам, обучающие симуляции и интерактивные шоурумы.',
     feats:[
       ['Тренажёры и симуляции','Отработка опасных и дорогих в реальности сценариев: производство, медицина, ЧС. Со статистикой прохождения.'],
       ['VR-презентации объектов','Туры по жилым комплексам, заводам и инфраструктуре — до завершения строительства.'],
@@ -651,17 +848,17 @@ const SERVICES = {
     ],
     tech:['Unity','Unreal Engine 5','WebXR','OpenXR','Meta Quest 3','Pico 4','Photon'],
     projects:[
-      {ind:'arch', t:'VR-тур по жилому комплексу до сдачи', d:'Покупатель «заходит» в квартиру с отделкой за два года до завершения стройки. Сценарии день/ночь, выбор отделки.', tech:['Unreal Engine 5','Quest 3'], img:'https://m-files.cdn1.cc/lpfile/7/0/0/7003eb4ea069aef09c732b09b2ae4bab/f.jpg'},
-      {ind:'industry', t:'Тренажёр работы на высоте', d:'Симуляция допуска к высотным работам: страховка, порядок действий, аварийные сценарии. Журнал ошибок для инструктора.', tech:['Unity','Pico 4','Аналитика'], img:'assets/portfolio-1.jpg'},
-      {ind:'med', t:'VR-симулятор приёмного отделения', d:'Отработка сортировки пациентов и коммуникации в стрессовой обстановке для студентов-медиков.', tech:['Unity','Quest 3','Голосовой ввод'], img:'assets/portfolio-2.jpg'},
-      {ind:'edu', t:'Виртуальная лаборатория химии', d:'Опыты, запрещённые в школьном классе, — безопасно и наглядно. 24 эксперимента по программе.', tech:['Unity','WebXR'], img:'assets/portfolio-3.jpg'},
-      {ind:'design', t:'VR-шоурум мебельного бренда', d:'Расстановка коллекции в виртуальном интерьере, смена материалов в реальном времени.', tech:['Unreal Engine 5','Конфигуратор'], img:'assets/portfolio-1.jpg'},
-      {ind:'industry', t:'Цифровой двойник цеха в VR', d:'Обход производственной линии, точки контроля, регламенты ТО прямо на оборудовании.', tech:['Unity','CAD-импорт'], img:'https://m-files.cdn1.cc/lpfile/4/1/8/418727045b05ea4da3af379e9df2d7fb/f.jpg'},
+      {ind:'arch', t:'VR-тур по жилому комплексу до сдачи', task:'Продавать квартиры до завершения стройки', sol:'VR-тур с отделкой, сценарии день/ночь', res:'−2 года', resd:'покупатель «заходит» в квартиру за 2 года до сдачи', d:'Покупатель «заходит» в квартиру с отделкой задолго до завершения стройки. Сценарии день/ночь, выбор отделки.', tech:['Unreal Engine 5','Quest 3'], img:'https://m-files.cdn1.cc/lpfile/7/0/0/7003eb4ea069aef09c732b09b2ae4bab/f.jpg'},
+      {ind:'industry', t:'Тренажёр работы на высоте', task:'Безопасно обучать допуску к высотным работам', sol:'VR-симуляция со страховкой и аварийными сценариями', res:'0 травм', resd:'отработка без риска для жизни и оборудования', d:'Симуляция допуска к высотным работам: страховка, порядок действий, аварийные сценарии. Журнал ошибок для инструктора.', tech:['Unity','Pico 4','Аналитика'], img:'assets/portfolio-1.jpg'},
+      {ind:'med', t:'VR-симулятор приёмного отделения', task:'Тренировать сортировку пациентов в стрессе', sol:'VR-симуляция триажа и коммуникации', res:'×3', resd:'больше повторов навыка, чем на манекенах', d:'Отработка сортировки пациентов и коммуникации в стрессовой обстановке для студентов-медиков.', tech:['Unity','Quest 3','Голосовой ввод'], img:'assets/portfolio-2.jpg'},
+      {ind:'edu', t:'Виртуальная лаборатория химии', task:'Проводить опасные опыты в школе', sol:'VR-лаборатория с 24 экспериментами', res:'24', resd:'эксперимента по программе — безопасно', d:'Опыты, запрещённые в школьном классе, — безопасно и наглядно. 24 эксперимента по программе.', tech:['Unity','WebXR'], img:'assets/portfolio-3.jpg'},
+      {ind:'design', t:'VR-шоурум мебельного бренда', task:'Показывать коллекцию без физического зала', sol:'VR-шоурум с заменой материалов в реальном времени', res:'−зал', resd:'презентация без аренды физического шоурума', d:'Расстановка коллекции в виртуальном интерьере, смена материалов в реальном времени.', tech:['Unreal Engine 5','Конфигуратор'], img:'assets/portfolio-1.jpg'},
+      {ind:'industry', t:'Цифровой двойник цеха в VR', task:'Обучать персонал регламентам ТО', sol:'Интерактивный двойник линии с точками контроля', res:'1:1', resd:'двойник цеха для обучения и контроля', d:'Обход производственной линии, точки контроля, регламенты ТО прямо на оборудовании.', tech:['Unity','CAD-импорт'], img:'https://m-files.cdn1.cc/lpfile/4/1/8/418727045b05ea4da3af379e9df2d7fb/f.jpg'},
     ]
   },
   '3d': {
-    title:'3D моделирование',
-    ana:'3D моделирование',
+    title:'3D-моделирование', ana:'3D-моделирование',
+    seo:['3D моделирование — Madjoris','Архитектурная визуализация, продуктовый рендер, цифровые двойники и real-time ассеты.'],
     lead:'Создаём 3D-контент любой сложности: архитектурную визуализацию, продуктовый рендер, цифровые двойники оборудования, анимацию и ассеты для реального времени.',
     feats:[
       ['Архитектурная визуализация','Фотореалистичные экстерьеры и интерьеры, аэропанорамы, анимационные ролики для девелоперов.'],
@@ -670,17 +867,17 @@ const SERVICES = {
     ],
     tech:['Blender','3ds Max','Corona / V-Ray','Substance 3D','ZBrush','Marvelous Designer'],
     projects:[
-      {ind:'arch', t:'Визуализация квартала на 12 корпусов', d:'48 экстерьерных ракурсов, 6 аэропанорам и ролик 90 секунд для старта продаж.', tech:['3ds Max','Corona'], img:'https://m-files.cdn1.cc/lpfile/5/a/5/5a5ac5a99fc374b7b8e52a6283d4574c/f.jpg'},
-      {ind:'design', t:'CGI-кампания для бренда косметики', d:'Серия продуктовых рендеров с жидкостями и макросъёмкой текстур — без единой фотографии.', tech:['Blender','Симуляция жидкостей'], img:'assets/portfolio-1.jpg'},
-      {ind:'industry', t:'Цифровой двойник станка с ЧПУ', d:'Точная модель по чертежам для каталога, обучения операторов и AR-инструкций.', tech:['3ds Max','CAD-конверсия'], img:'assets/portfolio-2.jpg'},
-      {ind:'med', t:'Анатомическая модель сердца', d:'Послойная интерактивная модель для медицинского приложения: камеры, клапаны, патологии.', tech:['ZBrush','Blender'], img:'assets/portfolio-3.jpg'},
-      {ind:'edu', t:'3D-атлас школьной физики', d:'60 интерактивных моделей — от ДВС до электромагнитных полей — для образовательной платформы.', tech:['Blender','glTF / WebGL'], img:'assets/portfolio-1.jpg'},
-      {ind:'arch', t:'Интерьерная линейка отделки', d:'Три стиля отделки в шести типах квартир: 54 интерьерных рендера для шоурума застройщика.', tech:['3ds Max','Corona'], img:'https://m-files.cdn1.cc/lpfile/1/b/8/1b84aded6b3f42e153870fc74a40ecd8/f.jpg'},
+      {ind:'arch', t:'Визуализация квартала на 12 корпусов', task:'Подготовить материалы к старту продаж', sol:'Пакет ракурсов, аэропанорамы и ролик', res:'48', resd:'экстерьерных ракурсов + ролик 90 сек', d:'48 экстерьерных ракурсов, 6 аэропанорам и ролик 90 секунд для старта продаж.', tech:['3ds Max','Corona'], img:'https://m-files.cdn1.cc/lpfile/5/a/5/5a5ac5a99fc374b7b8e52a6283d4574c/f.jpg'},
+      {ind:'design', t:'CGI-кампания для бренда косметики', task:'Снять кампанию без фотосъёмки', sol:'Серия продуктовых CGI-рендеров', res:'0 фото', resd:'вся кампания на CGI, без фотостудии', d:'Серия продуктовых рендеров с жидкостями и макросъёмкой текстур — без единой фотографии.', tech:['Blender','Симуляция жидкостей'], img:'assets/portfolio-1.jpg'},
+      {ind:'industry', t:'Цифровой двойник станка с ЧПУ', task:'Сделать каталог и обучение операторов', sol:'Точная модель по чертежам + AR-инструкции', res:'AR', resd:'инструкции по обслуживанию в дополненной реальности', d:'Точная модель по чертежам для каталога, обучения операторов и AR-инструкций.', tech:['3ds Max','CAD-конверсия'], img:'assets/portfolio-2.jpg'},
+      {ind:'med', t:'Анатомическая модель сердца', task:'Объяснять анатомию интерактивно', sol:'Послойная интерактивная 3D-модель', res:'послойно', resd:'камеры, клапаны и патологии в одной модели', d:'Послойная интерактивная модель для медицинского приложения: камеры, клапаны, патологии.', tech:['ZBrush','Blender'], img:'assets/portfolio-3.jpg'},
+      {ind:'edu', t:'3D-атлас школьной физики', task:'Сделать физику наглядной', sol:'Библиотека интерактивных WebGL-моделей', res:'60', resd:'интерактивных моделей для платформы', d:'60 интерактивных моделей — от ДВС до электромагнитных полей — для образовательной платформы.', tech:['Blender','glTF / WebGL'], img:'assets/portfolio-1.jpg'},
+      {ind:'arch', t:'Интерьерная линейка отделки', task:'Показать варианты отделки в шоуруме', sol:'Матрица стилей × типов квартир', res:'54', resd:'интерьерных рендера для шоурума застройщика', d:'Три стиля отделки в шести типах квартир: 54 интерьерных рендера для шоурума застройщика.', tech:['3ds Max','Corona'], img:'https://m-files.cdn1.cc/lpfile/1/b/8/1b84aded6b3f42e153870fc74a40ecd8/f.jpg'},
     ]
   },
   ai: {
-    title:'Нейросети / ИИ',
-    ana:'Нейросети',
+    title:'Нейросети / ИИ', ana:'Нейросети',
+    seo:['Нейросети и ИИ — Madjoris','Генеративный контент, компьютерное зрение и AI-ассистенты для реальных процессов.'],
     lead:'Внедряем генеративные нейросети и компьютерное зрение в реальные процессы: производство контента, контроль качества, ассистенты и автоматизация рутины.',
     feats:[
       ['Генеративный контент','Пайплайны на базе диффузионных моделей: изображения, текстуры, видео и вариации дизайна в фирменном стиле.'],
@@ -689,17 +886,17 @@ const SERVICES = {
     ],
     tech:['Stable Diffusion','ComfyUI','LLM / RAG','OpenCV','YOLO','Python'],
     projects:[
-      {ind:'design', t:'AI-пайплайн генерации упаковки', d:'Система генерирует вариации дизайна упаковки в фирменном стиле бренда: 200+ концептов в день вместо 5.', tech:['Stable Diffusion','ComfyUI','LoRA'], img:'assets/portfolio-1.jpg'},
-      {ind:'industry', t:'Контроль дефектов на конвейере', d:'Камеры + компьютерное зрение находят брак литья с точностью 98,5% — быстрее визуального контроля в 40 раз.', tech:['YOLO','OpenCV','Edge-сервер'], img:'assets/portfolio-2.jpg'},
-      {ind:'med', t:'Ассистент для разметки снимков', d:'Предразметка рентгеновских снимков для врачей: модель подсвечивает зоны внимания, врач подтверждает.', tech:['Computer Vision','DICOM'], img:'assets/portfolio-3.jpg'},
-      {ind:'edu', t:'AI-репетитор по предметам школьной программы', d:'LLM-ассистент с базой заданий: объясняет решение по шагам и адаптирует сложность под ученика.', tech:['LLM','RAG'], img:'assets/portfolio-1.jpg'},
-      {ind:'arch', t:'Генерация фасадных концептов', d:'Нейросеть предлагает варианты фасадов по объёмной модели и референсам — архитектор выбирает и дорабатывает.', tech:['Stable Diffusion','ControlNet'], img:'assets/portfolio-2.jpg'},
-      {ind:'design', t:'Виртуальная примерочная', d:'Перенос одежды бренда на фото клиента для интернет-магазина. Рост конверсии карточки товара.', tech:['Diffusion','Сегментация'], img:'assets/portfolio-3.jpg'},
+      {ind:'design', t:'AI-пайплайн генерации упаковки', task:'Ускорить генерацию концептов упаковки', sol:'Диффузионный пайплайн в фирменном стиле', res:'200+/день', resd:'концептов в день вместо 5', d:'Система генерирует вариации дизайна упаковки в фирменном стиле бренда: 200+ концептов в день вместо 5.', tech:['Stable Diffusion','ComfyUI','LoRA'], img:'assets/portfolio-1.jpg'},
+      {ind:'industry', t:'Контроль дефектов на конвейере', task:'Находить брак литья быстрее человека', sol:'CV-система на камерах + edge-сервер', res:'98,5%', resd:'точность, ×40 быстрее визуального контроля', d:'Камеры + компьютерное зрение находят брак литья с точностью 98,5% — быстрее визуального контроля в 40 раз.', tech:['YOLO','OpenCV','Edge-сервер'], img:'assets/portfolio-2.jpg'},
+      {ind:'med', t:'Ассистент для разметки снимков', task:'Ускорить разметку рентген-снимков', sol:'Предразметка с подтверждением врачом', res:'врач+AI', resd:'модель подсвечивает зоны, врач подтверждает', d:'Предразметка рентгеновских снимков для врачей: модель подсвечивает зоны внимания, врач подтверждает.', tech:['Computer Vision','DICOM'], img:'assets/portfolio-3.jpg'},
+      {ind:'edu', t:'AI-репетитор по школьной программе', task:'Объяснять решения по шагам', sol:'LLM-ассистент с базой заданий (RAG)', res:'адаптивно', resd:'сложность подстраивается под ученика', d:'LLM-ассистент с базой заданий: объясняет решение по шагам и адаптирует сложность под ученика.', tech:['LLM','RAG'], img:'assets/portfolio-1.jpg'},
+      {ind:'arch', t:'Генерация фасадных концептов', task:'Быстро перебирать варианты фасадов', sol:'Диффузия с ControlNet по объёмной модели', res:'×10', resd:'больше вариантов на этапе концепта', d:'Нейросеть предлагает варианты фасадов по объёмной модели и референсам — архитектор выбирает и дорабатывает.', tech:['Stable Diffusion','ControlNet'], img:'assets/portfolio-2.jpg'},
+      {ind:'design', t:'Виртуальная примерочная', task:'Поднять конверсию карточки товара', sol:'Перенос одежды на фото клиента', res:'+конверсия', resd:'рост конверсии карточки товара', d:'Перенос одежды бренда на фото клиента для интернет-магазина. Рост конверсии карточки товара.', tech:['Diffusion','Сегментация'], img:'assets/portfolio-3.jpg'},
     ]
   }
 };
 
-/* =================== РЕНДЕР =================== */
+/* =================== РЕНДЕР КАРТОЧЕК =================== */
 function cardHTML(p, svcKey, idx){
   const ind = INDUSTRIES[p.ind];
   return `<button class="card" onclick="openModal('${svcKey}',${idx})">
@@ -708,6 +905,7 @@ function cardHTML(p, svcKey, idx){
     </div>
     <div class="card-body">
       <h4>${p.t}</h4><p>${p.d}</p>
+      <div class="card-res"><b>${p.res}</b><span>${p.resd}</span></div>
       <div class="techs">${p.tech.map(t=>`<i>${t}</i>`).join('')}</div>
     </div>
   </button>`;
@@ -719,52 +917,56 @@ function renderService(key){
   if(el.dataset.done) return;
   el.innerHTML = `
   <section class="svc-hero">
-    <div class="hero-grid" aria-hidden="true" style="height:50%"></div>
+    <div class="grid-bg"></div>
     <div class="wrap" style="position:relative;z-index:1">
       <div class="eyebrow mono">Направление</div>
-      <h1 class="h-xl"><span class="ana" data-t="${s.ana}">${s.ana}</span></h1>
-      <p class="lead">${s.lead}</p>
+      <h1 class="h-xl">${s.ana}</h1>
+      <p class="lead" style="margin-top:22px">${s.lead}</p>
       <div class="feat">${s.feats.map(f=>`<div><b>${f[0]}</b><p>${f[1]}</p></div>`).join('')}</div>
       <div class="techline">${s.tech.map(t=>`<span>${t}</span>`).join('')}</div>
     </div>
   </section>
   <section>
     <div class="wrap">
-      <div class="eyebrow mono">Портфолио</div>
-      <h2 class="h-lg">Реализованные проекты</h2>
+      <div class="section-head"><div class="eyebrow mono">Портфолио</div><h2 class="h-lg">Реализованные проекты</h2><p>Кейсы разбиты по отраслям. Откройте карточку, чтобы увидеть задачу, решение и результат.</p></div>
       <div class="filters" data-svc="${key}">
         <button class="chip on" data-f="all">Все</button>
         ${Object.entries(INDUSTRIES).map(([k,v])=>`<button class="chip" data-f="${k}">${v.name}</button>`).join('')}
       </div>
-      <div class="grid" id="grid-${key}">
-        ${s.projects.map((p,i)=>cardHTML(p,key,i)).join('')}
-      </div>
+      <div class="grid" id="grid-${key}">${s.projects.map((p,i)=>cardHTML(p,key,i)).join('')}</div>
     </div>
   </section>
   <section class="band">
-    <div class="wrap">
-      <h2 class="h-lg">Похожая задача?</h2>
-      <a class="btn primary" href="#/partners">Обсудить проект</a>
-    </div>
+    <div class="wrap"><h2 class="h-lg">Похожая задача?</h2><div class="btn-row" style="justify-content:center"><a class="btn primary" href="#/partners">Обсудить проект →</a></div></div>
   </section>`;
   el.dataset.done = 1;
-
   el.querySelector('.filters').addEventListener('click', e=>{
     const b = e.target.closest('.chip'); if(!b) return;
     el.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
     b.classList.add('on');
     const f = b.dataset.f;
     document.getElementById('grid-'+key).innerHTML =
-      s.projects.map((p,i)=>({p,i})).filter(x=>f==='all'||x.p.ind===f)
-        .map(x=>cardHTML(x.p,key,x.i)).join('');
+      s.projects.map((p,i)=>({p,i})).filter(x=>f==='all'||x.p.ind===f).map(x=>cardHTML(x.p,key,x.i)).join('');
   });
 }
 
-/* избранное на главной: по 1 проекту из каждого направления */
 function renderFeatured(){
-  const picks = [['vr',0],['3d',1],['ai',1],['vr',2],['3d',3],['ai',4]];
-  document.getElementById('featured').innerHTML =
-    picks.map(([k,i])=>cardHTML(SERVICES[k].projects[i],k,i)).join('');
+  const picks = [['vr',0],['3d',0],['ai',1],['vr',1],['3d',2],['ai',0]];
+  document.getElementById('featured').innerHTML = picks.map(([k,i])=>cardHTML(SERVICES[k].projects[i],k,i)).join('');
+}
+function renderProcess(id){
+  document.getElementById(id).innerHTML = PROCESS.map(s=>`<div class="pstep"><div class="pn">${s[0]}</div><div class="bar"></div><h4>${s[1]}</h4><p>${s[2]}</p></div>`).join('');
+}
+function renderTeam(){
+  document.getElementById('team').innerHTML = TEAM.map(t=>`<div class="tm"><div class="av">${t[0]}</div><div class="role">${t[1]}</div><p>${t[2]}</p></div>`).join('');
+}
+function renderFAQ(){
+  document.getElementById('faq').innerHTML = FAQ.map((f,i)=>`<div class="fitem"><button class="fq" aria-expanded="false">${f[0]}</button><div class="fa"><div>${f[1]}</div></div></div>`).join('');
+  document.querySelectorAll('#faq .fq').forEach(b=>b.addEventListener('click',()=>{
+    const it=b.parentElement, open=it.classList.contains('open');
+    document.querySelectorAll('#faq .fitem').forEach(x=>{x.classList.remove('open');x.querySelector('.fq').setAttribute('aria-expanded','false')});
+    if(!open){it.classList.add('open');b.setAttribute('aria-expanded','true')}
+  }));
 }
 
 /* =================== МОДАЛКА =================== */
@@ -775,20 +977,30 @@ function openModal(svc,i){
   mph.style.backgroundImage = p.img ? `url('${p.img}')` : '';
   document.getElementById('m-title').textContent = p.t;
   document.getElementById('m-meta').textContent = ind.name+' · '+SERVICES[svc].title;
-  document.getElementById('m-desc').textContent = p.d+' Подробное описание кейса, задачи клиента и результаты предоставляются заказчиком при наполнении сайта.';
+  document.getElementById('m-task').textContent = p.task;
+  document.getElementById('m-sol').textContent = p.sol;
+  document.getElementById('m-res').textContent = p.res;
+  document.getElementById('m-desc').textContent = p.d+' Подробное описание кейса и достигнутых показателей предоставляется заказчиком при наполнении сайта.';
   document.getElementById('m-techs').innerHTML = p.tech.map(t=>`<i>${t}</i>`).join('');
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeModal(){
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow='';
-}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 /* =================== РОУТЕР =================== */
 const ROUTES = {'':'home','about':'about','vr':'vr','3d':'3d','ai':'ai','partners':'partners','contacts':'contacts'};
+const SEO = {
+  home:['MADJORIS — VR, 3D, цифровые двойники и нейросети','Инженерные цифровые решения: VR/AR, 3D-моделирование, цифровые двойники и AI для промышленности, строительства, медицины и образования.'],
+  about:['О компании — Madjoris','Инженерная команда цифровых решений: опыт с 2020 года, специалисты 7+ лет, работа в рамках распоряжения ДИТ Москвы.'],
+  partners:['Сотрудничество — Madjoris','Форматы работы, этапы проекта и бриф. Свяжитесь с инженерной командой Madjoris.'],
+  contacts:['Контакты — Madjoris','Телефон, email, мессенджеры и форма обратной связи Madjoris.'],
+};
+function setSEO(t,d){
+  document.title=t;
+  let m=document.querySelector('meta[name="description"]'); if(m)m.setAttribute('content',d);
+}
 function route(){
   const h = location.hash.replace(/^#\//,'').replace(/^#/,'');
   const key = ROUTES.hasOwnProperty(h) ? h : '';
@@ -800,21 +1012,22 @@ function route(){
   document.getElementById('menu').classList.remove('open');
   closeModal();
   window.scrollTo({top:0,behavior:'instant'});
-  const titles = {home:'Madjoris — VR, 3D, нейросети',about:'О компании — Madjoris',vr:'VR разработка — Madjoris','3d':'3D моделирование — Madjoris',ai:'Нейросети и ИИ — Madjoris',partners:'Сотрудничество — Madjoris',contacts:'Контакты — Madjoris'};
-  document.title = titles[page];
+  const seo = SERVICES[page]?.seo || SEO[page] || SEO.home;
+  setSEO(seo[0],seo[1]);
 }
 window.addEventListener('hashchange',route);
 
 /* =================== ФОРМЫ (демо) =================== */
 document.querySelectorAll('[data-form]').forEach(f=>{
-  f.addEventListener('submit',e=>{
-    e.preventDefault();
-    f.querySelector('.form-ok').style.display='block';
-    f.reset();
-  });
+  f.addEventListener('submit',e=>{e.preventDefault();f.querySelector('.form-ok').style.display='block';f.reset()});
 });
 
+/* init */
 renderFeatured();
+renderProcess('proc');
+renderProcess('proc2');
+renderTeam();
+renderFAQ();
 route();
 </script>
 </body>
