@@ -83,18 +83,18 @@ main{padding-top:70px}
 .page{display:none;animation:fade .4s ease}
 .page.visible{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-section{padding:96px 0;position:relative}
-@media(max-width:760px){section{padding:60px 0}}
+section{padding:120px 0;position:relative}
+@media(max-width:760px){section{padding:74px 0}}
 .eyebrow{margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:28px;height:1px;background:var(--cyan);display:inline-block}
 .h-xl{font-size:clamp(36px,6vw,76px);font-weight:900;letter-spacing:-.03em}
 .h-lg{font-size:clamp(28px,4vw,48px)}
 .h-md{font-size:clamp(20px,2.4vw,28px)}
-.lead{font-size:clamp(16px,1.5vw,19px);color:var(--muted);max-width:680px}
+.lead{font-size:clamp(16px,1.5vw,19px);color:var(--muted);max-width:680px;line-height:1.72}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 @media(max-width:900px){.split{grid-template-columns:1fr;gap:36px}}
-.section-head{max-width:760px;margin-bottom:50px}
-.section-head p{color:var(--muted);margin-top:16px}
+.section-head{max-width:760px;margin-bottom:64px}
+.section-head p{color:var(--muted);margin-top:18px;line-height:1.7}
 
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--line2);cursor:pointer;font-family:inherit;transition:transform .15s,background .2s,border-color .2s,color .2s}
 .btn:hover{transform:translateY(-2px)}
@@ -154,9 +154,9 @@ section{padding:96px 0;position:relative}
 .stat span{color:var(--muted);font-size:14px;display:block;margin-top:6px}
 
 /* ---------- direction cards ---------- */
-.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 @media(max-width:900px){.dirs{grid-template-columns:1fr}}
-.dir{position:relative;display:block;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:30px 28px 28px;overflow:hidden;transition:border-color .25s,transform .2s,background .25s}
+.dir{position:relative;display:block;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:40px 34px 36px;overflow:hidden;transition:border-color .25s,transform .2s,background .25s}
 .dir:hover{border-color:var(--line2);transform:translateY(-4px);background:var(--card2)}
 .dir .ico{width:46px;height:46px;border:1px solid var(--line2);border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--cyan);margin-bottom:46px}
 .dir .idx{position:absolute;right:26px;top:30px;font-family:'JetBrains Mono';font-size:12px;color:var(--dim);letter-spacing:.16em}
@@ -168,12 +168,12 @@ section{padding:96px 0;position:relative}
 .dir:hover::after{opacity:1}
 
 /* ---------- generic feature/value grids ---------- */
-.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
 @media(max-width:900px){.feat{grid-template-columns:1fr}}
 .feat>div{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--bg2)}
 .feat b{display:block;font-size:16px;margin-bottom:10px}
 .feat p{color:var(--muted);font-size:14px}
-.values{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:8px}
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:8px}
 @media(max-width:760px){.values{grid-template-columns:1fr}}
 .values>div{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--card)}
 .values b{display:block;font-size:17px;margin-bottom:10px}
@@ -187,16 +187,17 @@ section{padding:96px 0;position:relative}
 .chip{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em;border:1px solid var(--line2);background:transparent;color:var(--muted);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.2s}
 .chip:hover{color:var(--text);border-color:var(--cyan)}
 .chip.on{background:var(--cyan);color:#03201d;border-color:transparent;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.grid{grid-template-columns:1fr}}
+@media(min-width:1700px){.grid{grid-template-columns:repeat(4,1fr)}}
 .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card);cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:transform .2s,border-color .25s;padding:0;display:block;width:100%}
 .card:hover{transform:translateY(-4px);border-color:var(--line2)}
 .thumb{aspect-ratio:16/10;position:relative;display:flex;align-items:flex-end;padding:14px;overflow:hidden}
 .thumb .ph{position:absolute;inset:0;background-size:cover;background-position:center}
 .thumb .badge{position:relative;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;background:rgba(8,11,16,.78);backdrop-filter:blur(6px);padding:6px 12px;border-radius:99px;border:1px solid var(--line2)}
 .thumb .play{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;background:rgba(8,11,16,.78);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--cyan)}
-.card-body{padding:22px 20px 24px}
+.card-body{padding:28px 26px 30px}
 .card-body h4{font-weight:700;font-size:16px;line-height:1.35;margin-bottom:10px}
 .card-body p{color:var(--muted);font-size:14px;margin-bottom:16px}
 .card-res{display:flex;align-items:baseline;gap:8px;margin-bottom:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg2)}
@@ -242,7 +243,7 @@ section{padding:96px 0;position:relative}
 .eco-hub span{font-family:'JetBrains Mono';font-size:12px;color:var(--dim);letter-spacing:.12em}
 
 /* ---------- certificates ---------- */
-.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
 @media(max-width:760px){.certs{grid-template-columns:1fr}}
 .cert{border:1px dashed var(--line2);border-radius:12px;padding:22px;background:var(--bg2);display:flex;gap:16px;align-items:flex-start}
 .cert .ci{width:40px;height:40px;border:1px solid var(--line2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:var(--cyan);flex:none}
@@ -357,6 +358,18 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 .pstep2 .pc h4{font-size:19px;margin-bottom:7px}
 .pstep2 .pc p{color:var(--muted);font-size:15px;max-width:640px}
 @media(max-width:600px){.pstep2{grid-template-columns:44px 1fr;gap:18px}.ptl::before{left:22px}.pstep2 .pbadge{width:44px;height:44px}}
+
+/* process 2-col */
+.proc-sec{position:relative;background:radial-gradient(48% 70% at 86% 42%,rgba(45,130,255,.06),transparent 60%)}
+.proc-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:72px;align-items:start}
+@media(max-width:980px){.proc-grid{grid-template-columns:1fr;gap:40px}}
+.proc-left{position:sticky;top:96px}
+@media(max-width:980px){.proc-left{position:static}}
+.proc-graphic{margin-top:42px;max-width:320px}
+.cyc{width:100%;height:auto;overflow:visible}
+.cyc .rot{transform-origin:120px 120px;animation:cycrot 26s linear infinite}
+@keyframes cycrot{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.cyc .rot{animation:none}}
 </style>
 </head>
 <body>
@@ -476,14 +489,24 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
   </section>
 
   <!-- Процесс -->
-  <section style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head">
+  <section class="proc-sec">
+    <div class="wrap proc-grid">
+      <div class="proc-left">
         <div class="eyebrow mono">Процесс</div>
         <h2 class="h-lg">Производственный цикл проекта</h2>
-        <p>Прозрачные этапы с понятным результатом каждого — вы видите, за что платите, ещё до старта разработки.</p>
+        <p style="color:var(--muted);margin-top:18px;line-height:1.7">Прозрачные этапы с понятным результатом каждого — вы видите, за что платите, ещё до старта разработки.</p>
+        <div class="proc-graphic">
+          <svg class="cyc" viewBox="0 0 240 240" aria-hidden="true">
+            <defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2ce6d6"/><stop offset="1" stop-color="#3d7bff"/></linearGradient></defs>
+            <circle cx="120" cy="120" r="92" fill="none" stroke="rgba(140,170,195,.16)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="92" fill="none" stroke="url(#cg)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="150 430" class="rot"/>
+            <line x1="120.0" y1="36.0" x2="120.0" y2="20.0" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="185.7" y1="67.6" x2="198.2" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="201.9" y1="138.7" x2="217.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="156.4" y1="195.7" x2="163.4" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="83.6" y1="195.7" x2="76.6" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="38.1" y1="138.7" x2="22.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="54.3" y1="67.6" x2="41.8" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/>
+            <text x="120" y="118" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="50" fill="#e9eef4">7</text>
+            <text x="120" y="144" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" letter-spacing="3" fill="#8b97a6">ЭТАПОВ</text>
+          </svg>
+        </div>
       </div>
-      <div class="proc" id="proc"></div>
+      <div class="proc-right"><div class="proc" id="proc"></div></div>
     </div>
   </section>
 
