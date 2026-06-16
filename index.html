@@ -8,6 +8,10 @@
 <meta property="og:title" content="MADJORIS — VR, 3D, цифровые двойники и нейросети">
 <meta property="og:description" content="Инженерные цифровые решения: VR-тренажёры, 3D-визуализация, цифровые двойники и AI для промышленности, строительства и городской среды.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/og-cover.jpg">
+<meta name="theme-color" content="#0a0e13">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -41,7 +45,7 @@ body{
 ::selection{background:var(--cyan);color:#03201d}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.wrap{max-width:none;margin:0;padding:0 clamp(20px,3.5vw,64px)}
 .mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
 .mono.dim{color:var(--dim)}
 h1,h2,h3,h4{font-family:'Inter',sans-serif;font-weight:800;line-height:1.1;letter-spacing:-.02em}
@@ -321,6 +325,38 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 .foot-top nav a:hover,.foot-top a:hover{color:var(--cyan)}
 .foot-bottom{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:28px}
 .note{font-size:12px;color:var(--dim);max-width:520px}
+
+/* 3D hero canvas + image wiring */
+#hs-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block}
+.twin{background-image:linear-gradient(160deg,rgba(12,19,28,.35),rgba(9,13,18,.65)),url(assets/img/hero-poster.jpg);background-size:cover;background-position:center}
+.tm .tav{width:100%;aspect-ratio:1/1;border-radius:10px;background:#0c1118 center/cover no-repeat;border:1px solid var(--line2);margin-bottom:16px}
+
+/* hero (video-reference style) */
+.hero{position:relative;min-height:calc(100vh - 70px);display:flex;align-items:center;padding:0;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(55% 75% at 74% 46%,rgba(45,130,255,.22),transparent 60%),radial-gradient(42% 60% at 80% 40%,rgba(44,230,214,.16),transparent 55%),var(--bg)}
+#hs-canvas{position:absolute!important;inset:0;width:100%;height:100%;z-index:0;display:block;background:none}
+.hero-fade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 6%,rgba(10,14,19,.82) 30%,rgba(10,14,19,.2) 58%,transparent 82%),linear-gradient(0deg,var(--bg),transparent 26%)}
+.hero .wrap{position:relative;z-index:2}
+.hero-content{position:relative;z-index:2;max-width:620px;margin:0}
+.hero-content .h-xl{font-size:clamp(30px,4.6vw,56px)}
+.hero-sub{font-weight:700;font-size:clamp(18px,2.2vw,26px);color:var(--text);margin:-4px 0 20px;letter-spacing:-.01em}
+.hero-content h1{margin:18px 0 24px}
+.scroll-ind{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:1;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--dim);font-family:'JetBrains Mono';font-size:10px;letter-spacing:.22em}
+.scroll-ind .mouse{width:24px;height:38px;border:1px solid var(--line2);border-radius:13px;position:relative}
+.scroll-ind .mouse::after{content:"";position:absolute;left:50%;top:7px;transform:translateX(-50%);width:4px;height:7px;border-radius:2px;background:var(--cyan);animation:sc 1.8s infinite}
+@keyframes sc{0%{opacity:0;top:7px}40%{opacity:1}100%{opacity:0;top:19px}}
+@media(max-width:860px){.hero{min-height:auto;padding:64px 0 90px}.hero-fade{background:linear-gradient(0deg,var(--bg) 8%,rgba(10,14,19,.55) 55%,rgba(10,14,19,.72))}.hero-content{max-width:none}.scroll-ind{display:none}}
+
+.stat b{color:var(--cyan)}
+/* process timeline */
+.ptl{position:relative;margin-top:46px;padding-left:4px}
+.ptl::before{content:"";position:absolute;left:26px;top:16px;bottom:16px;width:1px;background:linear-gradient(180deg,var(--cyan),rgba(40,215,200,.08))}
+.pstep2{display:grid;grid-template-columns:54px 1fr;gap:26px;align-items:start}
+.pstep2 .pbadge{width:52px;height:52px;border:1px solid var(--line2);border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:15px;color:var(--cyan);background:var(--card);position:relative;z-index:1}
+.pstep2 .pc{padding:5px 0 26px}
+.pstep2:last-child .pc{padding-bottom:0}
+.pstep2 .pc h4{font-size:19px;margin-bottom:7px}
+.pstep2 .pc p{color:var(--muted);font-size:15px;max-width:640px}
+@media(max-width:600px){.pstep2{grid-template-columns:44px 1fr;gap:18px}.ptl::before{left:22px}.pstep2 .pbadge{width:44px;height:44px}}
 </style>
 </head>
 <body>
@@ -346,97 +382,29 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
 <!-- ================= ГЛАВНАЯ ================= -->
 <div class="page" id="page-home">
   <section class="hero">
-    <div class="wrap hero-inner">
-      <div>
-        <div class="eyebrow mono">VR · 3D · Цифровые двойники · AI</div>
-        <h1 class="h-xl">Цифровые двойники <span class="grad-text">реального мира</span> для бизнеса и государства</h1>
-        <p class="lead">Madjoris проектирует VR-тренажёры, 3D-визуализацию, цифровые двойники объектов и решения на базе нейросетей — от 3D-модели до внедрённой цифровой платформы. Для промышленности, строительства, медицины и образования.</p>
-        <div class="btn-row">
-          <a class="btn primary" href="#/partners">Обсудить проект →</a>
-          <a class="btn ghost" href="#/vr">Смотреть кейсы</a>
-        </div>
-        <div class="hero-strip">
-          <div><b>2020</b><span>на рынке IT-услуг</span></div>
-          <div><b>7+ лет</b><span>опыт каждого специалиста</span></div>
-          <div><b>4 отрасли</b><span>внедрений</span></div>
-          <div><b>3</b><span>направления разработки</span></div>
-        </div>
+    <canvas id="hs-canvas" role="img" aria-label="3D-модель VR-шлема Quest 2 со свечением"></canvas>
+    <div class="hero-fade"></div>
+    <div class="wrap"><div class="hero-content">
+      <div class="eyebrow mono">VR · 3D · Цифровые двойники · AI</div>
+      <h1 class="h-xl">Цифровые двойники<br><span class="grad-text">реального мира</span></h1>
+      <p class="hero-sub">для бизнеса, промышленности и государства</p>
+      <p class="lead">Madjoris проектирует VR-тренажёры, 3D-визуализацию, цифровые двойники объектов и решения на базе нейросетей — от 3D-модели до внедрённой цифровой платформы.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="#/partners">Обсудить проект →</a>
+        <a class="btn ghost" href="#/vr">▶ Смотреть кейсы</a>
       </div>
-      <div class="twin" role="img" aria-label="Визуализация цифрового двойника объекта">
-        <div class="hud">
-          <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
-          <span class="tag t1">DIGITAL TWIN · LIVE</span>
-          <span class="tag t2">LAT 55.75 LON 37.62</span>
-          <span class="tag t3">MESH 1.2M TRIS</span>
-          <span class="tag t4">SYNC 100%</span>
-        </div>
-        <div class="scan"></div>
-        <svg viewBox="0 0 520 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <defs>
-            <linearGradient id="bld" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="rgba(40,215,200,.30)"/>
-              <stop offset="1" stop-color="rgba(40,215,200,.02)"/>
-            </linearGradient>
-            <linearGradient id="bld2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="rgba(61,123,255,.30)"/>
-              <stop offset="1" stop-color="rgba(61,123,255,.02)"/>
-            </linearGradient>
-          </defs>
-          <!-- perspective ground grid -->
-          <g stroke="rgba(120,160,190,.16)" stroke-width="1">
-            <line x1="60" y1="360" x2="260" y2="250"/><line x1="120" y1="390" x2="300" y2="262"/>
-            <line x1="190" y1="420" x2="350" y2="276"/><line x1="270" y1="452" x2="408" y2="292"/>
-            <line x1="460" y1="360" x2="260" y2="250"/><line x1="400" y1="390" x2="220" y2="262"/>
-            <line x1="330" y1="420" x2="170" y2="276"/><line x1="250" y1="452" x2="112" y2="292"/>
-            <line x1="95" y1="375" x2="425" y2="375"/><line x1="135" y1="400" x2="385" y2="400"/>
-            <line x1="185" y1="430" x2="335" y2="430"/>
-          </g>
-          <!-- wireframe buildings (digital twin city) -->
-          <g stroke="var(--cyan)" stroke-width="1.4" fill="url(#bld)">
-            <path d="M150 300 L150 210 L195 192 L195 282 Z"/>
-            <path d="M195 282 L195 192 L235 210 L235 300 Z" fill="rgba(40,215,200,.10)"/>
-            <path d="M150 210 L195 192 L235 210 L190 228 Z" fill="rgba(40,215,200,.22)"/>
-          </g>
-          <g stroke="var(--blue)" stroke-width="1.4" fill="url(#bld2)">
-            <path d="M250 330 L250 200 L295 180 L295 312 Z"/>
-            <path d="M295 312 L295 180 L340 200 L340 330 Z" fill="rgba(61,123,255,.10)"/>
-            <path d="M250 200 L295 180 L340 200 L295 220 Z" fill="rgba(61,123,255,.24)"/>
-          </g>
-          <g stroke="rgba(40,215,200,.7)" stroke-width="1.2" fill="rgba(40,215,200,.06)">
-            <path d="M335 320 L335 250 L372 235 L372 305 Z"/>
-            <path d="M372 305 L372 235 L405 250 L405 320 Z" fill="rgba(40,215,200,.10)"/>
-            <path d="M335 250 L372 235 L405 250 L368 265 Z" fill="rgba(40,215,200,.2)"/>
-          </g>
-          <!-- data nodes + connectors -->
-          <g stroke="rgba(40,215,200,.5)" stroke-width="1" stroke-dasharray="3 4">
-            <line x1="190" y1="200" x2="295" y2="186"/><line x1="295" y1="186" x2="372" y2="240"/>
-            <line x1="372" y1="240" x2="190" y2="200"/>
-          </g>
-          <circle class="twn-node p" cx="190" cy="200" r="4"/>
-          <circle class="twn-node p2" cx="295" cy="186" r="4"/>
-          <circle class="twn-node p3" cx="372" cy="240" r="4"/>
-          <circle class="twn-node p2" cx="150" cy="300" r="3"/>
-          <circle class="twn-node p" cx="340" cy="330" r="3"/>
-        </svg>
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="vchips">
-        <div class="vchip"><span class="dotx"></span><b>Полный цикл</b> — от сценария до внедрения</div>
-        <div class="vchip"><span class="dotx"></span><b>Прозрачные сроки</b> до старта проекта</div>
-        <div class="vchip"><span class="dotx"></span><b>Под метрики бизнеса</b>, а не «ради красоты»</div>
-      </div>
-    </div>
+    </div></div>
+    <div class="scroll-ind"><span class="mouse"></span>SCROLL</div>
   </section>
 
   <!-- Stats -->
   <section style="padding-top:0">
     <div class="wrap">
       <div class="stats">
-        <div class="stat"><b><span class="accent">2020</span></b><span>год выхода на рынок IT-услуг</span></div>
-        <div class="stat"><b>7+ <span class="accent">лет</span></b><span>стаж каждого специалиста</span></div>
-        <div class="stat"><b><span class="accent">100%</span></b><span>специалистов с высшим образованием</span></div>
-        <div class="stat"><b><span class="accent">5</span></b><span>отраслей в портфолио</span></div>
+        <div class="stat"><b>2020</b><span>год выхода на рынок IT-услуг</span></div>
+        <div class="stat"><b>7+</b><span>лет опыта у каждого специалиста</span></div>
+        <div class="stat"><b>100%</b><span>специалистов с высшим образованием</span></div>
+        <div class="stat"><b>5</b><span>отраслей в портфолио</span></div>
       </div>
     </div>
   </section>
@@ -723,7 +691,7 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
           <div><span>Telegram</span><a href="#">уточнить ссылку у заказчика</a></div>
           <div><span>Юрлицо</span><a href="#">ООО «МАДЖОРИС» · ИНН 9731041680</a></div>
         </div>
-        <div class="map" style="margin-top:28px" role="img" aria-label="Карта офиса">
+        <div class="map" style="margin-top:28px;background-image:linear-gradient(rgba(10,14,19,.25),rgba(10,14,19,.55)),url(assets/img/map.jpg);background-size:cover;background-position:center" role="img" aria-label="Карта офиса">
           <div class="pin"></div>
           <span class="mono dim">Здесь будет карта (Яндекс.Карты / Google Maps)</span>
         </div>
@@ -900,7 +868,7 @@ const SERVICES = {
 function cardHTML(p, svcKey, idx){
   const ind = INDUSTRIES[p.ind];
   return `<button class="card" onclick="openModal('${svcKey}',${idx})">
-    <div class="thumb"><div class="ph ${ind.cls}"${p.img?` style="background-image:url('${p.img}')"`:''}></div>
+    <div class="thumb"><div class="ph ${ind.cls}" style="background-image:url('assets/img/case-${svcKey}-${idx+1}.jpg')"></div>
       <span class="badge">${ind.name}</span><span class="play">▶</span>
     </div>
     <div class="card-body">
@@ -955,10 +923,12 @@ function renderFeatured(){
   document.getElementById('featured').innerHTML = picks.map(([k,i])=>cardHTML(SERVICES[k].projects[i],k,i)).join('');
 }
 function renderProcess(id){
-  document.getElementById(id).innerHTML = PROCESS.map(s=>`<div class="pstep"><div class="pn">${s[0]}</div><div class="bar"></div><h4>${s[1]}</h4><p>${s[2]}</p></div>`).join('');
+  var el=document.getElementById(id); if(!el) return;
+  el.className='ptl';
+  el.innerHTML = PROCESS.map(s=>`<div class="pstep2"><div class="pbadge">${s[0]}</div><div class="pc"><h4>${s[1]}</h4><p>${s[2]}</p></div></div>`).join('');
 }
 function renderTeam(){
-  document.getElementById('team').innerHTML = TEAM.map(t=>`<div class="tm"><div class="av">${t[0]}</div><div class="role">${t[1]}</div><p>${t[2]}</p></div>`).join('');
+  document.getElementById('team').innerHTML = TEAM.map((t,i)=>`<div class="tm"><div class="tav" style="background-image:url('assets/img/team-${i+1}.jpg')"></div><div class="role">${t[1]}</div><p>${t[2]}</p></div>`).join('');
 }
 function renderFAQ(){
   document.getElementById('faq').innerHTML = FAQ.map((f,i)=>`<div class="fitem"><button class="fq" aria-expanded="false">${f[0]}</button><div class="fa"><div>${f[1]}</div></div></div>`).join('');
@@ -974,7 +944,7 @@ function openModal(svc,i){
   const p = SERVICES[svc].projects[i], ind = INDUSTRIES[p.ind];
   const mph = document.getElementById('m-ph');
   mph.className = 'ph '+ind.cls;
-  mph.style.backgroundImage = p.img ? `url('${p.img}')` : '';
+  mph.style.backgroundImage = `url('assets/img/case-${svc}-${i+1}.jpg')`;
   document.getElementById('m-title').textContent = p.t;
   document.getElementById('m-meta').textContent = ind.name+' · '+SERVICES[svc].title;
   document.getElementById('m-task').textContent = p.task;
@@ -1029,6 +999,50 @@ renderProcess('proc2');
 renderTeam();
 renderFAQ();
 route();
+</script>
+
+<script src="assets/models/quest2.js"></script>
+<script src="assets/js/three.min.js"></script>
+<script>
+(function(){
+  var cv=document.getElementById('hs-canvas');
+  if(!cv||!window.THREE||!window.QUEST2) return;
+  var T=window.THREE;
+  var renderer=new T.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+  var scene=new T.Scene();
+  var camera=new T.PerspectiveCamera(38,1,0.1,100); camera.position.set(0,0,6.4);
+  function b64(x){var bin=atob(x),u=new Uint8Array(bin.length),i;for(i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer;}
+  var pos=new Float32Array(b64(QUEST2.pos)), idx=new Uint32Array(b64(QUEST2.idx));
+  var geo=new T.BufferGeometry();
+  geo.setAttribute('position',new T.BufferAttribute(pos,3));
+  geo.setIndex(new T.BufferAttribute(idx,1));
+  geo.computeVertexNormals(); geo.computeBoundingBox();
+  var bb=geo.boundingBox, miny=bb.min.y, rng=Math.max(0.001,bb.max.y-bb.min.y);
+  var c1=new T.Color(0x2ce6d6), c2=new T.Color(0x5a8bff), tc=new T.Color();
+  function colorize(g){var p=g.attributes.position,m=p.count,c=new Float32Array(m*3),i;for(i=0;i<m;i++){var t=(p.getY(i)-miny)/rng;tc.copy(c1).lerp(c2,t);c[i*3]=tc.r;c[i*3+1]=tc.g;c[i*3+2]=tc.b;}g.setAttribute('color',new T.BufferAttribute(c,3));return g;}
+  var headset=new T.Group();
+  headset.add(new T.Mesh(geo,new T.MeshBasicMaterial({color:0x090d14,transparent:true,opacity:0.82,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1})));
+  headset.add(new T.LineSegments(colorize(new T.WireframeGeometry(geo)),new T.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.22,blending:T.AdditiveBlending,depthWrite:false})));
+  headset.add(new T.LineSegments(colorize(new T.EdgesGeometry(geo,24)),new T.LineBasicMaterial({vertexColors:true,transparent:true,opacity:0.95,blending:T.AdditiveBlending,depthWrite:false})));
+  headset.scale.set(1.2,1.2,1.2);
+  headset.rotation.z=0.32;
+  scene.add(headset);
+  function glowTex(){var c=document.createElement('canvas');c.width=c.height=256;var x=c.getContext('2d');var g=x.createRadialGradient(128,128,0,128,128,128);g.addColorStop(0,'rgba(70,210,240,0.9)');g.addColorStop(0.34,'rgba(55,130,255,0.32)');g.addColorStop(1,'rgba(10,14,19,0)');x.fillStyle=g;x.fillRect(0,0,256,256);return new T.CanvasTexture(c);}
+  var glow=new T.Mesh(new T.PlaneGeometry(10,10),new T.MeshBasicMaterial({map:glowTex(),transparent:true,blending:T.AdditiveBlending,depthWrite:false}));
+  glow.position.z=-2.6; scene.add(glow);
+  var PC=600, pp=new Float32Array(PC*3), i;
+  for(i=0;i<PC;i++){pp[i*3]=(Math.random()-0.5)*16;pp[i*3+1]=(Math.random()-0.5)*10;pp[i*3+2]=(Math.random()-0.5)*9-1.5;}
+  var pg=new T.BufferGeometry(); pg.setAttribute('position',new T.BufferAttribute(pp,3));
+  var stars=new T.Points(pg,new T.PointsMaterial({color:0x9fe0ff,size:0.03,transparent:true,opacity:0.75,blending:T.AdditiveBlending,depthWrite:false}));
+  scene.add(stars);
+  function layout(){var r=cv.getBoundingClientRect(),w=Math.max(1,r.width),h=Math.max(1,r.height);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();var mob=w<860;headset.position.set(mob?0:(w<1300?2.0:2.8), mob?0.1:0.45, 0);glow.position.x=headset.position.x;glow.position.y=headset.position.y;camera.position.z=mob?8.4:6.4;}
+  layout(); window.addEventListener('resize',layout);
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var a=0;
+  function loop(){requestAnimationFrame(loop); if(!reduce){a+=0.005; stars.rotation.y+=0.0002;} headset.rotation.y=-0.5+Math.sin(a*0.5)*0.5; headset.rotation.x=-0.12; renderer.render(scene,camera);}
+  loop();
+})();
 </script>
 </body>
 </html>
