@@ -12,10 +12,18 @@
 <meta name="theme-color" content="#0a0e13">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Unbounded:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/inter-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:swap;src:url('assets/fonts/unbounded-cyrillic-wght-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 900;font-display:swap;src:url('assets/fonts/unbounded-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/inter-cyrillic-wght-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/inter-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('assets/fonts/jetbrains-mono-cyrillic-wght-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:100 800;font-display:swap;src:url('assets/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 :root{
   --bg:#0a0e13;
   --bg2:#0e131b;
@@ -24,7 +32,7 @@
   --line:rgba(140,170,195,.12);
   --line2:rgba(140,170,195,.22);
   --text:#e9eef4;
-  --muted:#8b97a6;
+  --muted:#9aa7b6;
   --dim:#59636f;
   --cyan:#28d7c8;
   --cyan2:#37e6ff;
@@ -48,7 +56,7 @@ img{max-width:100%;display:block}
 .wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
 .mono{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
 .mono.dim{color:var(--dim)}
-h1,h2,h3,h4{font-family:'Unbounded','Inter',sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.01em;text-shadow:0.025em 0 rgba(255,59,92,.55),-0.025em 0 rgba(44,230,214,.55)}
+h1,h2,h3,h4{font-family:'Unbounded','Inter',sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.01em;text-shadow:0.045em 0 rgba(255,59,92,.6),-0.045em 0 rgba(44,230,214,.6)}
 .accent{color:var(--cyan)}
 .grad-text{background:linear-gradient(100deg,var(--cyan2),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
 
@@ -500,10 +508,64 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow mono">Кейсы</div>
-        <h2 class="h-lg">Реальные внедрения и их результат</h2>
+        <h2 class="h-lg">Реальные внедрения<br>и их результат</h2>
         <p>Главное — не картинки, а эффект для заказчика. Каждый кейс — задача, решение и измеримый результат.</p>
       </div>
-      <div class="grid" id="featured"></div>
+      <div class="grid" id="featured"><button class="card" onclick="openModal('vr',0)">
+    <div class="thumb"><div class="ph arch" style="background-image:url('assets/img/case-vr-1.jpg')"></div>
+      <span class="badge">Архитектура и строительство</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>VR-тур по жилому комплексу до сдачи</h4><p>Покупатель «заходит» в квартиру с отделкой задолго до завершения стройки. Сценарии день/ночь, выбор отделки.</p>
+      <div class="card-res"><b>−2 года</b><span>покупатель «заходит» в квартиру за 2 года до сдачи</span></div>
+      <div class="techs"><i>Unreal Engine 5</i><i>Quest 3</i></div>
+    </div>
+  </button><button class="card" onclick="openModal('3d',0)">
+    <div class="thumb"><div class="ph arch" style="background-image:url('assets/img/case-3d-1.jpg')"></div>
+      <span class="badge">Архитектура и строительство</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>Визуализация квартала на 12 корпусов</h4><p>48 экстерьерных ракурсов, 6 аэропанорам и ролик 90 секунд для старта продаж.</p>
+      <div class="card-res"><b>48</b><span>экстерьерных ракурсов + ролик 90 сек</span></div>
+      <div class="techs"><i>3ds Max</i><i>Corona</i></div>
+    </div>
+  </button><button class="card" onclick="openModal('ai',1)">
+    <div class="thumb"><div class="ph industry" style="background-image:url('assets/img/case-ai-2.jpg')"></div>
+      <span class="badge">Промышленность</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>Контроль дефектов на конвейере</h4><p>Камеры + компьютерное зрение находят брак литья с точностью 98,5% — быстрее визуального контроля в 40 раз.</p>
+      <div class="card-res"><b>98,5%</b><span>точность, ×40 быстрее визуального контроля</span></div>
+      <div class="techs"><i>YOLO</i><i>OpenCV</i><i>Edge-сервер</i></div>
+    </div>
+  </button><button class="card" onclick="openModal('vr',1)">
+    <div class="thumb"><div class="ph industry" style="background-image:url('assets/img/case-vr-2.jpg')"></div>
+      <span class="badge">Промышленность</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>Тренажёр работы на высоте</h4><p>Симуляция допуска к высотным работам: страховка, порядок действий, аварийные сценарии. Журнал ошибок для инструктора.</p>
+      <div class="card-res"><b>0 травм</b><span>отработка без риска для жизни и оборудования</span></div>
+      <div class="techs"><i>Unity</i><i>Pico 4</i><i>Аналитика</i></div>
+    </div>
+  </button><button class="card" onclick="openModal('3d',2)">
+    <div class="thumb"><div class="ph industry" style="background-image:url('assets/img/case-3d-3.jpg')"></div>
+      <span class="badge">Промышленность</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>Цифровой двойник станка с ЧПУ</h4><p>Точная модель по чертежам для каталога, обучения операторов и AR-инструкций.</p>
+      <div class="card-res"><b>AR</b><span>инструкции по обслуживанию в дополненной реальности</span></div>
+      <div class="techs"><i>3ds Max</i><i>CAD-конверсия</i></div>
+    </div>
+  </button><button class="card" onclick="openModal('ai',0)">
+    <div class="thumb"><div class="ph design" style="background-image:url('assets/img/case-ai-1.jpg')"></div>
+      <span class="badge">Дизайн</span><span class="play">▶</span>
+    </div>
+    <div class="card-body">
+      <h4>AI-пайплайн генерации упаковки</h4><p>Система генерирует вариации дизайна упаковки в фирменном стиле бренда: 200+ концептов в день вместо 5.</p>
+      <div class="card-res"><b>200+/день</b><span>концептов в день вместо 5</span></div>
+      <div class="techs"><i>Stable Diffusion</i><i>ComfyUI</i><i>LoRA</i></div>
+    </div>
+  </button></div>
       <div class="btn-row" style="justify-content:center"><a class="btn ghost" href="#/vr">Кейсы VR-разработки →</a><a class="btn ghost" href="#/3d">Кейсы 3D →</a><a class="btn ghost" href="#/ai">Кейсы AI →</a></div>
     </div>
   </section>
@@ -514,7 +576,7 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
       <div class="section-head"><div class="eyebrow mono">Процесс</div><h2 class="h-lg">Производственный цикл проекта</h2><p>Прозрачные этапы с понятным результатом каждого — вы видите, за что платите, ещё до старта разработки.</p></div>
       <div class="proc-body">
         <div class="proc-graphic"><svg class="cyc" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2ce6d6"/><stop offset="1" stop-color="#3d7bff"/></linearGradient></defs><circle cx="120" cy="120" r="92" fill="none" stroke="rgba(140,170,195,.16)" stroke-width="1"/><circle cx="120" cy="120" r="92" fill="none" stroke="url(#cg)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="150 430" class="rot"/><line x1="120.0" y1="36.0" x2="120.0" y2="20.0" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="185.7" y1="67.6" x2="198.2" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="201.9" y1="138.7" x2="217.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="156.4" y1="195.7" x2="163.4" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="83.6" y1="195.7" x2="76.6" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="38.1" y1="138.7" x2="22.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="54.3" y1="67.6" x2="41.8" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><text x="120" y="118" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="46" fill="#e9eef4">7</text><text x="120" y="144" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" letter-spacing="3" fill="#8b97a6">ЭТАПОВ</text></svg></div>
-        <div class="proc-right"><div class="proc" id="proc"></div></div>
+        <div class="proc-right"><div class="ptl" id="proc"><div class="pstep2"><div class="pbadge">01</div><div class="pc"><h4>Анализ</h4><p>Разбираем задачу бизнеса и критерии успеха. Результат — техническое задание и метрики.</p></div></div><div class="pstep2"><div class="pbadge">02</div><div class="pc"><h4>Проектирование</h4><p>Сценарий, архитектура решения, выбор стека. Результат — проектная документация.</p></div></div><div class="pstep2"><div class="pbadge">03</div><div class="pc"><h4>Прототип</h4><p>Ранний рабочий прототип ключевого сценария. Результат — проверенная гипотеза.</p></div></div><div class="pstep2"><div class="pbadge">04</div><div class="pc"><h4>Разработка</h4><p>Производство 3D-контента, кода, AI-пайплайнов. Результат — рабочая сборка.</p></div></div><div class="pstep2"><div class="pbadge">05</div><div class="pc"><h4>Тестирование</h4><p>Проверка на устройствах и сценариях, оптимизация. Результат — стабильная версия.</p></div></div><div class="pstep2"><div class="pbadge">06</div><div class="pc"><h4>Внедрение</h4><p>Запуск, интеграция в процессы и обучение. Результат — продукт в эксплуатации.</p></div></div><div class="pstep2"><div class="pbadge">07</div><div class="pc"><h4>Поддержка</h4><p>Сопровождение, доработки и развитие. Результат — продукт, который живёт.</p></div></div></div></div>
       </div>
     </div>
   </section>
@@ -559,7 +621,7 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
   <section style="padding-top:0">
     <div class="wrap" style="max-width:920px">
       <div class="section-head"><div class="eyebrow mono">FAQ</div><h2 class="h-lg">Частые вопросы</h2></div>
-      <div class="faq" id="faq"></div>
+      <div class="faq" id="faq"><div class="fitem"><button class="fq" aria-expanded="false">С какими отраслями вы работаете?</button><div class="fa"><div>Архитектура и строительство, промышленность, медицина, образование и дизайн. Под каждую отрасль у нас есть профильные кейсы и понимание специфики.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Чем VR-тренажёр лучше обычного обучения?</button><div class="fa"><div>Он позволяет безопасно отрабатывать опасные и дорогие в реальности сценарии, ведёт журнал ошибок и сокращает время и стоимость обучения персонала.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Что такое цифровой двойник и зачем он нужен?</button><div class="fa"><div>Это точная цифровая модель реального объекта или оборудования, которую можно использовать для обучения, презентаций, AR-инструкций и контроля — до и во время эксплуатации.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Сколько длится проект?</button><div class="fa"><div>Зависит от типа: VR-тур — 3–5 недель, тренажёр — 6–10 недель, пакет 3D-визуализации — 2–4 недели. Точную оценку даём после брифа.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Вы делаете только разработку или сопровождение тоже?</button><div class="fa"><div>Полный цикл: от сценария и 3D-контента до публикации и последующей поддержки. Один подрядчик на весь проект.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Под какие устройства вы разрабатываете VR?</button><div class="fa"><div>Meta Quest 3, Pico 4, HTC Vive и WebXR в браузере — выбираем платформу под задачу и аудиторию.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Можно ли начать с пилота?</button><div class="fa"><div>Да. Часто оптимально стартовать с прототипа ключевого сценария, проверить гипотезу и метрики, а затем масштабировать.</div></div></div><div class="fitem"><button class="fq" aria-expanded="false">Как формируется стоимость?</button><div class="fa"><div>Индивидуально под объём и сложность. После брифа предоставляем смету, сроки и состав работ. Цены на сайте не публикуются.</div></div></div></div>
     </div>
   </section>
 
@@ -625,7 +687,7 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
   <section style="padding-top:0">
     <div class="wrap">
       <div class="section-head"><div class="eyebrow mono">Команда</div><h2 class="h-lg">Кто ведёт проекты</h2></div>
-      <div class="team" id="team"></div>
+      <div class="team" id="team"><div class="tm"><div class="tav" style="background-image:url('assets/img/team-1.jpg')"></div><div class="role">3D / Tech Art</div><p>Архитектурная визуализация, real-time ассеты, оптимизация под VR.</p></div><div class="tm"><div class="tav" style="background-image:url('assets/img/team-2.jpg')"></div><div class="role">VR / Unreal</div><p>Тренажёры и симуляции на Unity и Unreal Engine 5, WebXR.</p></div><div class="tm"><div class="tav" style="background-image:url('assets/img/team-3.jpg')"></div><div class="role">AI / CV</div><p>Генеративные пайплайны, компьютерное зрение, LLM-ассистенты.</p></div><div class="tm"><div class="tav" style="background-image:url('assets/img/team-4.jpg')"></div><div class="role">Управление проектами</div><p>Сроки, документация, коммуникация с заказчиком и метрики.</p></div></div>
       <p class="note" style="margin-top:18px">Состав проектной команды формируется под задачу. Фото и роли специалистов предоставляются заказчиком/компанией при наполнении сайта.</p>
     </div>
   </section>
@@ -684,7 +746,7 @@ footer{padding:56px 0 40px;color:var(--muted);font-size:14px;border-top:1px soli
       <div class="section-head"><div class="eyebrow mono">Этапы</div><h2 class="h-lg">Как проходит проект</h2><p>От первой консультации до поддержки — прозрачный цикл с понятным результатом каждого этапа.</p></div>
       <div class="proc-body">
         <div class="proc-graphic"><svg class="cyc" viewBox="0 0 240 240" aria-hidden="true"><defs><linearGradient id="cg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2ce6d6"/><stop offset="1" stop-color="#3d7bff"/></linearGradient></defs><circle cx="120" cy="120" r="92" fill="none" stroke="rgba(140,170,195,.16)" stroke-width="1"/><circle cx="120" cy="120" r="92" fill="none" stroke="url(#cg2)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="150 430" class="rot"/><line x1="120.0" y1="36.0" x2="120.0" y2="20.0" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="185.7" y1="67.6" x2="198.2" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="201.9" y1="138.7" x2="217.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="156.4" y1="195.7" x2="163.4" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="83.6" y1="195.7" x2="76.6" y2="210.1" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="38.1" y1="138.7" x2="22.5" y2="142.3" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><line x1="54.3" y1="67.6" x2="41.8" y2="57.7" stroke="rgba(140,170,195,.45)" stroke-width="2" stroke-linecap="round"/><text x="120" y="118" text-anchor="middle" font-family="Unbounded,sans-serif" font-weight="700" font-size="46" fill="#e9eef4">7</text><text x="120" y="144" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" letter-spacing="3" fill="#8b97a6">ЭТАПОВ</text></svg></div>
-        <div class="proc-right"><div class="proc" id="proc2"></div></div>
+        <div class="proc-right"><div class="ptl" id="proc2"><div class="pstep2"><div class="pbadge">01</div><div class="pc"><h4>Анализ</h4><p>Разбираем задачу бизнеса и критерии успеха. Результат — техническое задание и метрики.</p></div></div><div class="pstep2"><div class="pbadge">02</div><div class="pc"><h4>Проектирование</h4><p>Сценарий, архитектура решения, выбор стека. Результат — проектная документация.</p></div></div><div class="pstep2"><div class="pbadge">03</div><div class="pc"><h4>Прототип</h4><p>Ранний рабочий прототип ключевого сценария. Результат — проверенная гипотеза.</p></div></div><div class="pstep2"><div class="pbadge">04</div><div class="pc"><h4>Разработка</h4><p>Производство 3D-контента, кода, AI-пайплайнов. Результат — рабочая сборка.</p></div></div><div class="pstep2"><div class="pbadge">05</div><div class="pc"><h4>Тестирование</h4><p>Проверка на устройствах и сценариях, оптимизация. Результат — стабильная версия.</p></div></div><div class="pstep2"><div class="pbadge">06</div><div class="pc"><h4>Внедрение</h4><p>Запуск, интеграция в процессы и обучение. Результат — продукт в эксплуатации.</p></div></div><div class="pstep2"><div class="pbadge">07</div><div class="pc"><h4>Поддержка</h4><p>Сопровождение, доработки и развитие. Результат — продукт, который живёт.</p></div></div></div></div>
       </div>
     </div>
   </section>
